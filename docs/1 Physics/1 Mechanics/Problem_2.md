@@ -1,2 +1,11 @@
 # Problem 2
 ıpıopouıpıyşlkhş
+kh  qksjhASKAJS
+,,DSAŞKDKAJSDKLASD,ÜŞK
+
+DAS
+DŞLKASJDKASİDSA
+DJAŞSLKDŞLASDAS
+D
+SAKDLKJASJLDAKMS
+D
