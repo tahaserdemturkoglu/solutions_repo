@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 # Problem 1
 # Theoretical Foundation
-=======
- # Problem 1
->>>>>>> 063b18b3f3b503c38767c31b8cf45a5f70cb3d50
 
-<<<<<<< HEAD
 ## Derivation of Governing Equations of Motion
 
 Projectile motion is governed by Newton's Second Law:
@@ -284,8 +279,3 @@ plot_range_vs_angle(initial_velocity)
 
 
 [colab](link): https://colab.research.google.com/drive/13P_7Ohhb6kFeDbJA3iHL-tW_bh_vFlN1?usp=sharing
-=======
-what is happening 12312312
-2131 23
-
->>>>>>> 063b18b3f3b503c38767c31b8cf45a5f70cb3d50
