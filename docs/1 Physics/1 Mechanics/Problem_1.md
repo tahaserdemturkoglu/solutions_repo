@@ -217,65 +217,65 @@ These applications illustrate the fundamental role of differential equations in 
 ###  4  phyton /plot
 
 
-![alt text](image.png)
-
-
 ![alt text](image-1.png)
 
+![alt text](image-2.png)
 
 ```python
-
 import numpy as np
 import matplotlib.pyplot as plt
 
-def projectile_motion(v0, theta, g=9.81):
-    """Simulates projectile motion for a given initial velocity and launch angle."""
-    theta_rad = np.radians(theta)
-    t_flight = (2 * v0 * np.sin(theta_rad)) / g
-    t = np.linspace(0, t_flight, num=100)
-    
-    x = v0 * np.cos(theta_rad) * t
-    y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2
-    
+# Constants
+g = 9.8  # Acceleration due to gravity (m/s^2)
+
+# Function to calculate the trajectory of a projectile
+def projectile_trajectory(v0, theta_deg, t_max=5.0, dt=0.01):
+    theta_rad = np.radians(theta_deg)  # Convert angle to radians
+    t = np.arange(0, t_max, dt)  # Time array
+    x = v0 * np.cos(theta_rad) * t  # Horizontal position
+    y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2  # Vertical position
     return x, y
 
-def plot_trajectory(v0, angles, g=9.81):
-    """Plots the trajectory for multiple angles."""
-    plt.figure(figsize=(10, 5))
+# Function to plot multiple trajectories
+def plot_projectile_trajectories(velocities, angles, labels, colors, title):
+    plt.figure(figsize=(12, 6))
     
-    for theta in angles:
-        x, y = projectile_motion(v0, theta, g)
-        plt.plot(x, y, label=f"{theta}°")
+    for v0, theta, label, color in zip(velocities, angles, labels, colors):
+        x, y = projectile_trajectory(v0, theta)
+        plt.plot(x, y, label=label, color=color, linewidth=2)
+        
+        # Find the range (x when y = 0)
+        range_x = x[np.argmax(y <= 0)]
+        plt.text(range_x, 0, f"R = {range_x:.1f} m", ha='center', va='bottom', fontsize=10)
     
-    plt.xlabel("Distance (m)")
-    plt.ylabel("Height (m)")
-    plt.title(f"Projectile Motion for v0 = {v0} m/s")
+    # Add annotations and labels
+    plt.xlabel('Horizontal Distance (x) [m]')
+    plt.ylabel('Vertical Height (y) [m]')
+    plt.title(title)
     plt.legend()
-    plt.grid()
+    plt.grid(True)
+    plt.axhline(0, color='black',linewidth=0.5)
     plt.show()
 
-def plot_range_vs_angle(v0, g=9.81):
-    """Plots range vs. angle of projection."""
-    angles = np.linspace(0, 90, num=50)
-    ranges = [(v0**2 * np.sin(2 * np.radians(theta))) / g for theta in angles]
-    
-    plt.figure(figsize=(8, 5))
-    plt.plot(angles, ranges, 'r-', linewidth=2)
-    plt.xlabel("Angle of Projection (degrees)")
-    plt.ylabel("Range (m)")
-    plt.title(f"Range vs. Angle for v0 = {v0} m/s")
-    plt.grid()
-    plt.show()
+# Part (a): Different initial velocities at 45 degrees
+velocities_a = [30, 40, 50]  # Initial velocities in m/s
+angles_a = [45, 45, 45]     # Launch angles in degrees
+labels_a = ['30 m/s', '40 m/s', '50 m/s']
+colors_a = ['red', 'purple', 'green']
 
-# Example Usage
-initial_velocity = 20  # m/s
-angles_to_simulate = [15, 30, 45, 60, 75]
+# Part (b): Different launch angles at 50 m/s
+velocities_b = [50, 50, 50, 50]  # Initial velocities in m/s
+angles_b = [15, 45, 75, 50]     # Launch angles in degrees
+labels_b = ['15°', '45°', '75°', '50°']
+colors_b = ['red', 'purple', 'green', 'blue']
 
-plot_trajectory(initial_velocity, angles_to_simulate)
-plot_range_vs_angle(initial_velocity)
+# Plotting the graphs
+print("Plotting Part (a):")
+plot_projectile_trajectories(velocities_a, angles_a, labels_a, colors_a, "(a) Different Initial Velocities at 45°")
 
-
+print("\nPlotting Part (b):")
+plot_projectile_trajectories(velocities_b, angles_b, labels_b, colors_b, "(b) Different Launch Angles at 50 m/s")
 ```
 
-
-[colab](link): https://colab.research.google.com/drive/13P_7Ohhb6kFeDbJA3iHL-tW_bh_vFlN1?usp=sharing
+## Colab
+[Colab](https://colab.research.google.com/drive/1R8uP7tOEooSSDNhfp65kFBhZ6K9hYZJQ?authuser=0#scrollTo=DsfumtOCw_EM)
