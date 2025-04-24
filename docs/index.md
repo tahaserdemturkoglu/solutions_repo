@@ -45,3 +45,5 @@ Please visit the [Mathematics Physics Lectures](https://dchorazkiewicz.github.io
 * [Mathematics](https://dchorazkiewicz.github.io/Mathematics_Physics_Lectures/Mathematics/Exercises/)
 * [Discret Mathematics](https://dchorazkiewicz.github.io/Mathematics_Physics_Lectures/Discrete_Mathematics/Exercises/)
 
+* 2332
+
