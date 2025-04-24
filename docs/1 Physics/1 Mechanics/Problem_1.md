@@ -1,4 +1,291 @@
+<<<<<<< HEAD
+# Problem 1
+# Theoretical Foundation
+=======
  # Problem 1
+>>>>>>> 063b18b3f3b503c38767c31b8cf45a5f70cb3d50
 
+<<<<<<< HEAD
+## Derivation of Governing Equations of Motion
+
+Projectile motion is governed by Newton's Second Law:
+
+$F=ma$
+
+In the absence of air resistance, the only force acting on a projectile is gravity. Assuming motion in two dimensions (horizontal $x$ and vertical $y$), we express the acceleration components as:
+
+$a_x=0,\quad a_y=-g$
+
+where $g$ is the acceleration due to gravity.
+
+Using kinematic equations:
+
+$v=v_0+at$
+
+$s=s_0+v_0t+\frac{1}{2}at^2$
+
+For horizontal motion:
+
+$v_x=v_0\cos\theta$
+
+$x=v_0\cos\theta\cdot t$
+
+For vertical motion:
+
+$v_y=v_0\sin\theta-gt$
+
+$y=v_0\sin\theta\cdot t-\frac{1}{2}gt^2$
+
+where:
+- $v_0$ is the initial velocity,
+- $\theta$ is the launch angle,
+- $t$ is time.
+
+## Solving the Basic Differential Equations
+
+The motion of the projectile can also be described using differential equations:
+
+$$\frac{d^2x}{dt^2}=0,\quad\frac{d^2y}{dt^2}=-g$$
+
+Integrating both equations:
+
+$$\frac{dx}{dt}=v_0\cos\theta$$
+
+$$\frac{dy}{dt}=v_0\sin\theta-gt$$
+
+A second integration gives the position equations:
+
+$$x(t)=v_0\cos\theta\cdot t$$
+
+$$y(t)=v_0\sin\theta\cdot t-\frac{1}{2}gt^2$$
+
+## Effect of Initial Conditions on Trajectory
+
+### Time of Flight
+
+Setting $y=0$ to find the total flight time:
+
+$$v_0\sin\theta\cdot t-\frac{1}{2}gt^2=0$$
+
+Solving for $t$:
+
+$$t=\frac{2v_0\sin\theta}{g}$$
+
+### Maximum Height
+
+At the peak of the motion, $v_y=0$:
+
+$$0=v_0\sin\theta-gt_{max}$$
+
+Solving for $t_{max}$:
+
+$$t_{max}=\frac{v_0\sin\theta}{g}$$
+
+Substituting into the vertical position equation:
+
+$$H=\frac{(v_0\sin\theta)^2}{2g}$$
+
+### Range of the Projectile
+
+The range $R$ is given by:
+
+$$R=v_0\cos\theta\cdot t_{total}$$
+
+Substituting $t_{total}=\frac{2v_0\sin\theta}{g}$:
+
+$$R=\frac{v_0^2\sin2\theta}{g}$$
+
+### Observations
+
+- The range is maximized at $\theta=45^\circ$.
+- Doubling the initial velocity quadruples the range.
+- Increasing $g$ decreases the range.
+
+These equations provide a foundation for further analysis, including air resistance and varying gravitational fields.
+
+
+
+
+# **Analysis of the Range**
+
+## **Dependence of Range on Angle of Projection**
+
+The range $R$ of a projectile launched with an initial velocity $v_0$ at an angle $	heta$ from the horizontal is given by the equation:
+
+$$R = \frac{v_0^2 \sin 2\theta}{g}$$
+
+where:
+- $v_0$ is the initial velocity,
+- $	heta$ is the angle of projection,
+- $g$ is the acceleration due to gravity.
+
+### **Analysis:**
+- The range $R$ is maximized when $\sin 2	heta = 1$, which occurs at $2	heta = 90^\circ$, or $	heta = 45^\circ$.
+- For angles $	heta > 45^\circ$ or $	heta < 45^\circ$, the range decreases.
+- The function $\sin 2	heta$ is symmetric about $45^\circ$, meaning that angles $	heta$ and $90^\circ - 	heta$ produce the same range.
+
+## **Effect of Initial Velocity and Gravitational Acceleration on Range**
+
+Since the range equation is:
+
+$$R = \frac{v_0^2 \sin 2\theta}{g},$$
+
+we can analyze the influence of $v_0$ and $g$:
+
+### **Effect of Initial Velocity $v_0$:**
+
+$$\frac{dR}{dv_0} = \frac{2 v_0 \sin 2\theta}{g} > 0$$
+
+- The range $R$ increases quadratically with $v_0$, meaning that doubling the initial velocity results in a fourfold increase in range.
+
+### **Effect of Gravitational Acceleration $g$:**
+
+$$\frac{dR}{dg} = -\frac{v_0^2 \sin 2\theta}{g^2} < 0$$
+
+- The range $R$ is inversely proportional to $g$, meaning that increasing gravity decreases the range.
+- On celestial bodies with lower $g$ (e.g., the Moon), the projectile travels much farther.
+
+## **Conclusion**
+- The range depends on both the angle and the initial velocity.
+- The maximum range occurs at $45^\circ$.
+- Increasing the initial velocity significantly increases the range.
+- A higher gravitational acceleration reduces the range.
+
+These principles are crucial in physics, engineering, and ballistics, influencing projectile motion analysis in various fields.
+
+
+
+
+# **Practical Applications of Differential Equations**
+
+## **1. Suspension Bridges**
+
+Suspension bridges are modeled using second-order differential equations that describe the motion and forces acting on the structure. A common equation used in modeling is:
+
+$$EI\frac{d^4y}{dx^4}=q(x)$$
+
+where:
+- $E$ is the Young’s modulus,
+- $I$ is the second moment of area,
+- $y(x)$ is the deflection of the bridge deck,
+- $q(x)$ represents the distributed load.
+
+The natural frequency of oscillation is given by:
+
+$$\omega_n=\sqrt{\frac{k}{m}}$$
+
+where $k$ is the stiffness of the cables and $m$ is the mass per unit length.
+
+## **2. Energy Harvesting Systems**
+
+Energy harvesting systems use vibrational energy to generate power, often modeled as a damped harmonic oscillator:
+
+$$m\frac{d^2x}{dt^2}+c\frac{dx}{dt}+kx=F(t)$$
+
+where:
+- $m$ is the mass of the system,
+- $c$ is the damping coefficient,
+- $k$ is the stiffness,
+- $F(t)$ represents the external driving force.
+
+A piezoelectric harvester converts mechanical energy into electrical energy, where the governing equation includes an electromechanical coupling term:
+
+$$M\ddot{X}+C\dot{X}+KX=\alpha V$$
+$$C_e\dot{V}+GV=\alpha\dot{X}$$
+
+where $V$ is the voltage generated and $\alpha$ is the coupling coefficient.
+
+## **3. Driven RLC Circuits**
+
+An RLC circuit, consisting of a resistor $R$, inductor $L$, and capacitor $C$, is governed by:
+
+$$L\frac{d^2q}{dt^2}+R\frac{dq}{dt}+\frac{q}{C}=V(t)$$
+
+where $q$ is the charge and $V(t)$ is an external driving voltage.
+
+For an AC-driven circuit:
+
+$$V(t)=V_0\cos(\omega t)$$
+
+The steady-state solution is given by:
+
+$$I(t)=I_0\cos(\omega t-\phi)$$
+
+where the phase shift $\phi$ is determined by:
+
+$$\tan\phi=\frac{\omega L-\frac{1}{\omega C}}{R}$$
+
+These applications illustrate the fundamental role of differential equations in engineering and physics, governing complex systems from mechanical oscillations to electrical circuits.
+
+
+
+###  4  phyton /plot
+
+
+![alt text](image.png)
+
+
+![alt text](image-1.png)
+
+
+```python
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile_motion(v0, theta, g=9.81):
+    """Simulates projectile motion for a given initial velocity and launch angle."""
+    theta_rad = np.radians(theta)
+    t_flight = (2 * v0 * np.sin(theta_rad)) / g
+    t = np.linspace(0, t_flight, num=100)
+    
+    x = v0 * np.cos(theta_rad) * t
+    y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2
+    
+    return x, y
+
+def plot_trajectory(v0, angles, g=9.81):
+    """Plots the trajectory for multiple angles."""
+    plt.figure(figsize=(10, 5))
+    
+    for theta in angles:
+        x, y = projectile_motion(v0, theta, g)
+        plt.plot(x, y, label=f"{theta}°")
+    
+    plt.xlabel("Distance (m)")
+    plt.ylabel("Height (m)")
+    plt.title(f"Projectile Motion for v0 = {v0} m/s")
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+def plot_range_vs_angle(v0, g=9.81):
+    """Plots range vs. angle of projection."""
+    angles = np.linspace(0, 90, num=50)
+    ranges = [(v0**2 * np.sin(2 * np.radians(theta))) / g for theta in angles]
+    
+    plt.figure(figsize=(8, 5))
+    plt.plot(angles, ranges, 'r-', linewidth=2)
+    plt.xlabel("Angle of Projection (degrees)")
+    plt.ylabel("Range (m)")
+    plt.title(f"Range vs. Angle for v0 = {v0} m/s")
+    plt.grid()
+    plt.show()
+
+# Example Usage
+initial_velocity = 20  # m/s
+angles_to_simulate = [15, 30, 45, 60, 75]
+
+plot_trajectory(initial_velocity, angles_to_simulate)
+plot_range_vs_angle(initial_velocity)
+
+
+```
+
+
+[colab](link): https://colab.research.google.com/drive/13P_7Ohhb6kFeDbJA3iHL-tW_bh_vFlN1?usp=sharing
+=======
 what is happening 12312312
 2131 23
+
+>>>>>>> 063b18b3f3b503c38767c31b8cf45a5f70cb3d50
