@@ -47,6 +47,8 @@
 <li class="toctree-l1 current"><a class="reference internal current">1 Mechanics</a>
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<ul class="current">
+</ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
 </li>
@@ -169,9 +171,225 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p># Problem 1</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h1 id="problem-1">Problem 1</h1>
+<h1 id="theoretical-foundation">Theoretical Foundation</h1>
+<p>=======
+ # Problem 1</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>063b18b3f3b503c38767c31b8cf45a5f70cb3d50</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h2 id="derivation-of-governing-equations-of-motion">Derivation of Governing Equations of Motion</h2>
+<p>Projectile motion is governed by Newton's Second Law:</p>
+<p><span class="arithmatex">\(F=ma\)</span></p>
+<p>In the absence of air resistance, the only force acting on a projectile is gravity. Assuming motion in two dimensions (horizontal <span class="arithmatex">\(x\)</span> and vertical <span class="arithmatex">\(y\)</span>), we express the acceleration components as:</p>
+<p><span class="arithmatex">\(a_x=0,\quad a_y=-g\)</span></p>
+<p>where <span class="arithmatex">\(g\)</span> is the acceleration due to gravity.</p>
+<p>Using kinematic equations:</p>
+<p><span class="arithmatex">\(v=v_0+at\)</span></p>
+<p><span class="arithmatex">\(s=s_0+v_0t+\frac{1}{2}at^2\)</span></p>
+<p>For horizontal motion:</p>
+<p><span class="arithmatex">\(v_x=v_0\cos\theta\)</span></p>
+<p><span class="arithmatex">\(x=v_0\cos\theta\cdot t\)</span></p>
+<p>For vertical motion:</p>
+<p><span class="arithmatex">\(v_y=v_0\sin\theta-gt\)</span></p>
+<p><span class="arithmatex">\(y=v_0\sin\theta\cdot t-\frac{1}{2}gt^2\)</span></p>
+<p>where:
+- <span class="arithmatex">\(v_0\)</span> is the initial velocity,
+- <span class="arithmatex">\(\theta\)</span> is the launch angle,
+- <span class="arithmatex">\(t\)</span> is time.</p>
+<h2 id="solving-the-basic-differential-equations">Solving the Basic Differential Equations</h2>
+<p>The motion of the projectile can also be described using differential equations:</p>
+<div class="arithmatex">\[\frac{d^2x}{dt^2}=0,\quad\frac{d^2y}{dt^2}=-g\]</div>
+<p>Integrating both equations:</p>
+<div class="arithmatex">\[\frac{dx}{dt}=v_0\cos\theta\]</div>
+<div class="arithmatex">\[\frac{dy}{dt}=v_0\sin\theta-gt\]</div>
+<p>A second integration gives the position equations:</p>
+<div class="arithmatex">\[x(t)=v_0\cos\theta\cdot t\]</div>
+<div class="arithmatex">\[y(t)=v_0\sin\theta\cdot t-\frac{1}{2}gt^2\]</div>
+<h2 id="effect-of-initial-conditions-on-trajectory">Effect of Initial Conditions on Trajectory</h2>
+<h3 id="time-of-flight">Time of Flight</h3>
+<p>Setting <span class="arithmatex">\(y=0\)</span> to find the total flight time:</p>
+<div class="arithmatex">\[v_0\sin\theta\cdot t-\frac{1}{2}gt^2=0\]</div>
+<p>Solving for <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[t=\frac{2v_0\sin\theta}{g}\]</div>
+<h3 id="maximum-height">Maximum Height</h3>
+<p>At the peak of the motion, <span class="arithmatex">\(v_y=0\)</span>:</p>
+<div class="arithmatex">\[0=v_0\sin\theta-gt_{max}\]</div>
+<p>Solving for <span class="arithmatex">\(t_{max}\)</span>:</p>
+<div class="arithmatex">\[t_{max}=\frac{v_0\sin\theta}{g}\]</div>
+<p>Substituting into the vertical position equation:</p>
+<div class="arithmatex">\[H=\frac{(v_0\sin\theta)^2}{2g}\]</div>
+<h3 id="range-of-the-projectile">Range of the Projectile</h3>
+<p>The range <span class="arithmatex">\(R\)</span> is given by:</p>
+<div class="arithmatex">\[R=v_0\cos\theta\cdot t_{total}\]</div>
+<p>Substituting <span class="arithmatex">\(t_{total}=\frac{2v_0\sin\theta}{g}\)</span>:</p>
+<div class="arithmatex">\[R=\frac{v_0^2\sin2\theta}{g}\]</div>
+<h3 id="observations">Observations</h3>
+<ul>
+<li>The range is maximized at <span class="arithmatex">\(\theta=45^\circ\)</span>.</li>
+<li>Doubling the initial velocity quadruples the range.</li>
+<li>Increasing <span class="arithmatex">\(g\)</span> decreases the range.</li>
+</ul>
+<p>These equations provide a foundation for further analysis, including air resistance and varying gravitational fields.</p>
+<h1 id="analysis-of-the-range"><strong>Analysis of the Range</strong></h1>
+<h2 id="dependence-of-range-on-angle-of-projection"><strong>Dependence of Range on Angle of Projection</strong></h2>
+<p>The range <span class="arithmatex">\(R\)</span> of a projectile launched with an initial velocity <span class="arithmatex">\(v_0\)</span> at an angle $ heta$ from the horizontal is given by the equation:</p>
+<div class="arithmatex">\[R = \frac{v_0^2 \sin 2\theta}{g}\]</div>
+<p>where:
+- <span class="arithmatex">\(v_0\)</span> is the initial velocity,
+- $ heta$ is the angle of projection,
+- <span class="arithmatex">\(g\)</span> is the acceleration due to gravity.</p>
+<h3 id="analysis"><strong>Analysis:</strong></h3>
+<ul>
+<li>The range <span class="arithmatex">\(R\)</span> is maximized when <span class="arithmatex">\(\sin 2   heta = 1\)</span>, which occurs at <span class="arithmatex">\(2   heta = 90^\circ\)</span>, or $  heta = 45^\circ$.</li>
+<li>For angles $  heta &gt; 45^\circ$ or $   heta &lt; 45^\circ$, the range decreases.</li>
+<li>The function <span class="arithmatex">\(\sin 2  heta\)</span> is symmetric about <span class="arithmatex">\(45^\circ\)</span>, meaning that angles $  heta$ and <span class="arithmatex">\(90^\circ -   heta\)</span> produce the same range.</li>
+</ul>
+<h2 id="effect-of-initial-velocity-and-gravitational-acceleration-on-range"><strong>Effect of Initial Velocity and Gravitational Acceleration on Range</strong></h2>
+<p>Since the range equation is:</p>
+<div class="arithmatex">\[R = \frac{v_0^2 \sin 2\theta}{g},\]</div>
+<p>we can analyze the influence of <span class="arithmatex">\(v_0\)</span> and <span class="arithmatex">\(g\)</span>:</p>
+<h3 id="effect-of-initial-velocity-v_0"><strong>Effect of Initial Velocity <span class="arithmatex">\(v_0\)</span>:</strong></h3>
+<div class="arithmatex">\[\frac{dR}{dv_0} = \frac{2 v_0 \sin 2\theta}{g} &gt; 0\]</div>
+<ul>
+<li>The range <span class="arithmatex">\(R\)</span> increases quadratically with <span class="arithmatex">\(v_0\)</span>, meaning that doubling the initial velocity results in a fourfold increase in range.</li>
+</ul>
+<h3 id="effect-of-gravitational-acceleration-g"><strong>Effect of Gravitational Acceleration <span class="arithmatex">\(g\)</span>:</strong></h3>
+<div class="arithmatex">\[\frac{dR}{dg} = -\frac{v_0^2 \sin 2\theta}{g^2} &lt; 0\]</div>
+<ul>
+<li>The range <span class="arithmatex">\(R\)</span> is inversely proportional to <span class="arithmatex">\(g\)</span>, meaning that increasing gravity decreases the range.</li>
+<li>On celestial bodies with lower <span class="arithmatex">\(g\)</span> (e.g., the Moon), the projectile travels much farther.</li>
+</ul>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<ul>
+<li>The range depends on both the angle and the initial velocity.</li>
+<li>The maximum range occurs at <span class="arithmatex">\(45^\circ\)</span>.</li>
+<li>Increasing the initial velocity significantly increases the range.</li>
+<li>A higher gravitational acceleration reduces the range.</li>
+</ul>
+<p>These principles are crucial in physics, engineering, and ballistics, influencing projectile motion analysis in various fields.</p>
+<h1 id="practical-applications-of-differential-equations"><strong>Practical Applications of Differential Equations</strong></h1>
+<h2 id="1-suspension-bridges"><strong>1. Suspension Bridges</strong></h2>
+<p>Suspension bridges are modeled using second-order differential equations that describe the motion and forces acting on the structure. A common equation used in modeling is:</p>
+<div class="arithmatex">\[EI\frac{d^4y}{dx^4}=q(x)\]</div>
+<p>where:
+- <span class="arithmatex">\(E\)</span> is the Young’s modulus,
+- <span class="arithmatex">\(I\)</span> is the second moment of area,
+- <span class="arithmatex">\(y(x)\)</span> is the deflection of the bridge deck,
+- <span class="arithmatex">\(q(x)\)</span> represents the distributed load.</p>
+<p>The natural frequency of oscillation is given by:</p>
+<div class="arithmatex">\[\omega_n=\sqrt{\frac{k}{m}}\]</div>
+<p>where <span class="arithmatex">\(k\)</span> is the stiffness of the cables and <span class="arithmatex">\(m\)</span> is the mass per unit length.</p>
+<h2 id="2-energy-harvesting-systems"><strong>2. Energy Harvesting Systems</strong></h2>
+<p>Energy harvesting systems use vibrational energy to generate power, often modeled as a damped harmonic oscillator:</p>
+<div class="arithmatex">\[m\frac{d^2x}{dt^2}+c\frac{dx}{dt}+kx=F(t)\]</div>
+<p>where:
+- <span class="arithmatex">\(m\)</span> is the mass of the system,
+- <span class="arithmatex">\(c\)</span> is the damping coefficient,
+- <span class="arithmatex">\(k\)</span> is the stiffness,
+- <span class="arithmatex">\(F(t)\)</span> represents the external driving force.</p>
+<p>A piezoelectric harvester converts mechanical energy into electrical energy, where the governing equation includes an electromechanical coupling term:</p>
+<div class="arithmatex">\[M\ddot{X}+C\dot{X}+KX=\alpha V$$
+$$C_e\dot{V}+GV=\alpha\dot{X}\]</div>
+<p>where <span class="arithmatex">\(V\)</span> is the voltage generated and <span class="arithmatex">\(\alpha\)</span> is the coupling coefficient.</p>
+<h2 id="3-driven-rlc-circuits"><strong>3. Driven RLC Circuits</strong></h2>
+<p>An RLC circuit, consisting of a resistor <span class="arithmatex">\(R\)</span>, inductor <span class="arithmatex">\(L\)</span>, and capacitor <span class="arithmatex">\(C\)</span>, is governed by:</p>
+<div class="arithmatex">\[L\frac{d^2q}{dt^2}+R\frac{dq}{dt}+\frac{q}{C}=V(t)\]</div>
+<p>where <span class="arithmatex">\(q\)</span> is the charge and <span class="arithmatex">\(V(t)\)</span> is an external driving voltage.</p>
+<p>For an AC-driven circuit:</p>
+<div class="arithmatex">\[V(t)=V_0\cos(\omega t)\]</div>
+<p>The steady-state solution is given by:</p>
+<div class="arithmatex">\[I(t)=I_0\cos(\omega t-\phi)\]</div>
+<p>where the phase shift <span class="arithmatex">\(\phi\)</span> is determined by:</p>
+<div class="arithmatex">\[\tan\phi=\frac{\omega L-\frac{1}{\omega C}}{R}\]</div>
+<p>These applications illustrate the fundamental role of differential equations in engineering and physics, governing complex systems from mechanical oscillations to electrical circuits.</p>
+<h3 id="4-phyton-plot">4  phyton /plot</h3>
+<p><img alt="alt text" src="image.png"/></p>
+<p><img alt="alt text" src="image-1.png"/></p>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile_motion(v0, theta, g=9.81):
+    """Simulates projectile motion for a given initial velocity and launch angle."""
+    theta_rad = np.radians(theta)
+    t_flight = (2 * v0 * np.sin(theta_rad)) / g
+    t = np.linspace(0, t_flight, num=100)
+
+    x = v0 * np.cos(theta_rad) * t
+    y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2
+
+    return x, y
+
+def plot_trajectory(v0, angles, g=9.81):
+    """Plots the trajectory for multiple angles."""
+    plt.figure(figsize=(10, 5))
+
+    for theta in angles:
+        x, y = projectile_motion(v0, theta, g)
+        plt.plot(x, y, label=f"{theta}°")
+
+    plt.xlabel("Distance (m)")
+    plt.ylabel("Height (m)")
+    plt.title(f"Projectile Motion for v0 = {v0} m/s")
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+def plot_range_vs_angle(v0, g=9.81):
+    """Plots range vs. angle of projection."""
+    angles = np.linspace(0, 90, num=50)
+    ranges = [(v0**2 * np.sin(2 * np.radians(theta))) / g for theta in angles]
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(angles, ranges, 'r-', linewidth=2)
+    plt.xlabel("Angle of Projection (degrees)")
+    plt.ylabel("Range (m)")
+    plt.title(f"Range vs. Angle for v0 = {v0} m/s")
+    plt.grid()
+    plt.show()
+
+# Example Usage
+initial_velocity = 20  # m/s
+angles_to_simulate = [15, 30, 45, 60, 75]
+
+plot_trajectory(initial_velocity, angles_to_simulate)
+plot_range_vs_angle(initial_velocity)
+
+
+</code></pre>
+<h1 id="colab-httpscolabresearchgooglecomdrive13p_7ohhb6kfedbja3ihl-tw_bh_vfln1uspsharing"><a href="link">colab</a>: https://colab.research.google.com/drive/13P_7Ohhb6kFeDbJA3iHL-tW_bh_vFlN1?usp=sharing</h1>
 <p>what is happening 12312312
 2131 23</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>063b18b3f3b503c38767c31b8cf45a5f70cb3d50</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
