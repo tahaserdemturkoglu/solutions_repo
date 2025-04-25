@@ -185,7 +185,7 @@ where:
 
 A piezoelectric harvester converts mechanical energy into electrical energy, where the governing equation includes an electromechanical coupling term:
 
-$$M\ddot{X}+C\dot{X}+KX=\alpha V$$
+$$M\ddot{X}+C\dot{X}+KX=\alpha V$$ 
 $$C_e\dot{V}+GV=\alpha\dot{X}$$
 
 where $V$ is the voltage generated and $\alpha$ is the coupling coefficient.
