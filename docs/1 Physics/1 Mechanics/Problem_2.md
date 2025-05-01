@@ -32,7 +32,9 @@ $$
 Define:
 
 - $\gamma = \frac{b}{mL^2}$ (damping ratio)
+
 - $\omega_0^2 = \frac{g}{L}$ (natural frequency squared)
+
 - $f = \frac{F_0}{mL^2}$ (normalized driving amplitude)
 
 Then the equation becomes:
