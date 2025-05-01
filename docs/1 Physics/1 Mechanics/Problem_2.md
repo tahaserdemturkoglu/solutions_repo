@@ -29,17 +29,23 @@ $$
 \ddot{\theta} + \frac{b}{mL^2} \dot{\theta} + \frac{g}{L} \sin(\theta) = \frac{F_0}{mL^2} \cos(\omega t)
 $$
 
-Define:
+Define the key parameters:
 
-- $\gamma = \frac{b}{mL^2}$ (damping ratio)
+- $\gamma = \dfrac{b}{mL^2}$  
 
----
+  *(Damping ratio — quantifies the resistive torque per unit angular velocity)*
 
-- $\omega_0^2 = \frac{g}{L}$ (natural frequency squared)
+&nbsp;
 
----
+- $\omega_0^2 = \dfrac{g}{L}$  
 
-- $f = \frac{F_0}{mL^2}$ (normalized driving amplitude)
+  *(Square of the natural angular frequency — depends on gravitational acceleration and pendulum length)*
+
+&nbsp;
+
+- $f = \dfrac{F_0}{mL^2}$  
+
+  *(Normalized driving amplitude — represents the strength of the external periodic torque)*
 
 Then the equation becomes:
 
