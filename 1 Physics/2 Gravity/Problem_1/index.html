@@ -172,6 +172,311 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="1-theoretical-derivation">1. Theoretical Derivation</h1>
+<h2 id="11-introduction">1.1 Introduction</h2>
+<p>To derive Kepler’s Third Law for circular orbits, we begin with <strong>Newton's Law of Universal Gravitation</strong> and <strong>centripetal force</strong>. We aim to find a mathematical relationship between the <strong>orbital period squared</strong> and the <strong>orbital radius cubed</strong>, i.e., </p>
+<div class="arithmatex">\[
+T^2 \propto r^3
+\]</div>
+<p>This derivation assumes the orbiting body has negligible mass compared to the central mass and follows a <strong>perfectly circular orbit</strong>.</p>
+<hr/>
+<h2 id="12-newtons-law-of-universal-gravitation">1.2 Newton's Law of Universal Gravitation</h2>
+<p>Newton’s law states that the gravitational force <span class="arithmatex">\(F_g\)</span> between two point masses <span class="arithmatex">\(m_1\)</span> and <span class="arithmatex">\(m_2\)</span> separated by a distance <span class="arithmatex">\(r\)</span> is given by:</p>
+<div class="arithmatex">\[
+F_g = G \frac{m_1 m_2}{r^2}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\(F_g\)</span> is the gravitational force
+- <span class="arithmatex">\(G\)</span> is the universal gravitational constant (<span class="arithmatex">\(6.674 \times 10^{-11} \, \text{Nm}^2/\text{kg}^2\)</span>)
+- <span class="arithmatex">\(r\)</span> is the separation between the centers of mass</p>
+<hr/>
+<h2 id="13-centripetal-force-in-circular-motion">1.3 Centripetal Force in Circular Motion</h2>
+<p>For an object of mass <span class="arithmatex">\(m\)</span> moving with orbital speed <span class="arithmatex">\(v\)</span> in a circle of radius <span class="arithmatex">\(r\)</span>, the required centripetal force <span class="arithmatex">\(F_c\)</span> is:</p>
+<div class="arithmatex">\[
+F_c = \frac{m v^2}{r}
+\]</div>
+<p>In a stable circular orbit, this force is provided entirely by gravity. Therefore:</p>
+<div class="arithmatex">\[
+F_g = F_c
+\]</div>
+<p>Substituting:</p>
+<div class="arithmatex">\[
+G \frac{M m}{r^2} = \frac{m v^2}{r}
+\]</div>
+<p>Cancel <span class="arithmatex">\(m\)</span> (mass of the orbiting body) from both sides:</p>
+<div class="arithmatex">\[
+G \frac{M}{r^2} = \frac{v^2}{r}
+\]</div>
+<p>Multiply both sides by <span class="arithmatex">\(r\)</span>:</p>
+<div class="arithmatex">\[
+G \frac{M}{r} = v^2
+\]</div>
+<hr/>
+<h2 id="14-orbital-period-and-velocity">1.4 Orbital Period and Velocity</h2>
+<p>The orbital period <span class="arithmatex">\(T\)</span> is the time it takes for one full orbit. For a circular orbit, the distance traveled in one period is the circumference <span class="arithmatex">\(2\pi r\)</span>:</p>
+<div class="arithmatex">\[
+v = \frac{2\pi r}{T}
+\]</div>
+<p>Substitute this into the previous equation:</p>
+<div class="arithmatex">\[
+G \frac{M}{r} = \left( \frac{2\pi r}{T} \right)^2
+\]</div>
+<p>Expand the right-hand side:</p>
+<div class="arithmatex">\[
+G \frac{M}{r} = \frac{4\pi^2 r^2}{T^2}
+\]</div>
+<p>Multiply both sides by <span class="arithmatex">\(T^2\)</span>:</p>
+<div class="arithmatex">\[
+G M T^2 = 4\pi^2 r^3
+\]</div>
+<p>Finally, solve for <span class="arithmatex">\(T^2\)</span>:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2}{G M} r^3
+\]</div>
+<hr/>
+<h2 id="15-final-form-of-keplers-third-law">1.5 Final Form of Kepler’s Third Law</h2>
+<p>This is the <strong>mathematical expression of Kepler’s Third Law</strong> for circular orbits:</p>
+<div class="arithmatex">\[
+T^2 \propto r^3
+\]</div>
+<p>The constant of proportionality is <span class="arithmatex">\(\frac{4\pi^2}{G M}\)</span>, which depends on the mass <span class="arithmatex">\(M\)</span> of the central object.</p>
+<hr/>
+<h1 id="2-astronomical-implications">2. Astronomical Implications</h1>
+<h2 id="21-determining-planetary-masses-using-keplers-third-law">2.1 Determining Planetary Masses Using Kepler's Third Law</h2>
+<p>Kepler’s Third Law, when combined with Newtonian mechanics, allows us to <strong>calculate the mass of a central celestial body</strong>—such as a planet or star—by observing the motion of an orbiting object.</p>
+<p>From the derived formula:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2}{G M} r^3
+\]</div>
+<p>Rearranging to solve for <span class="arithmatex">\(M\)</span>:</p>
+<div class="arithmatex">\[
+M = \frac{4\pi^2 r^3}{G T^2}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\(r\)</span> is the orbital radius
+- <span class="arithmatex">\(T\)</span> is the orbital period
+- <span class="arithmatex">\(M\)</span> is the mass of the central body
+- <span class="arithmatex">\(G\)</span> is the gravitational constant</p>
+<p><strong>Example</strong>: By observing a moon orbiting a planet and measuring its orbital radius and period, we can calculate the planet’s mass precisely.</p>
+<hr/>
+<h2 id="22-measuring-distances-between-celestial-bodies">2.2 Measuring Distances Between Celestial Bodies</h2>
+<p>Kepler’s Third Law is also used to <strong>determine distances in astronomical units (AU)</strong> within a solar system. If the orbital period of a planet is known, we can solve for <span class="arithmatex">\(r\)</span>:</p>
+<div class="arithmatex">\[
+r^3 = \frac{G M}{4\pi^2} T^2
+\]</div>
+<p>This allows astronomers to determine the average <strong>orbital radius (semi-major axis)</strong> for planets or satellites without needing direct distance measurements.</p>
+<h3 id="application-example">Application Example:</h3>
+<p>If a satellite is in orbit around Earth and its period <span class="arithmatex">\(T\)</span> is measured to be 90 minutes, the orbital radius <span class="arithmatex">\(r\)</span> (distance from the Earth's center) can be calculated, assuming Earth's mass <span class="arithmatex">\(M \approx 5.97 \times 10^{24} \, \text{kg}\)</span>.</p>
+<hr/>
+<h2 id="23-understanding-gravitational-interactions-in-planetary-systems">2.3 Understanding Gravitational Interactions in Planetary Systems</h2>
+<p>Kepler's Third Law reveals essential truths about the <strong>gravitational structure and dynamics</strong> of planetary systems:</p>
+<ul>
+<li><strong>Orbital hierarchy</strong>: Bodies farther from the central mass have longer periods, implying a natural ordering of planetary orbits.</li>
+<li><strong>Stability analysis</strong>: Deviations from <span class="arithmatex">\(T^2 \propto r^3\)</span> can indicate <strong>perturbations</strong> or <strong>gravitational influences</strong> from other nearby bodies.</li>
+<li><strong>Mass distribution</strong>: In binary systems or exoplanet systems, the law helps in estimating the <strong>combined mass</strong> of the orbiting and central objects, particularly when both have non-negligible mass.</li>
+</ul>
+<h3 id="binary-system-case">Binary System Case:</h3>
+<p>If two stars orbit their common center of mass, a modified version of Kepler's law applies:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2 a^3}{G (M_1 + M_2)}
+\]</div>
+<p>Where <span class="arithmatex">\(a\)</span> is the semi-major axis of the relative orbit, and <span class="arithmatex">\(M_1\)</span>, <span class="arithmatex">\(M_2\)</span> are the masses of the two stars.</p>
+<hr/>
+<h2 id="24-broader-significance">2.4 Broader Significance</h2>
+<ul>
+<li>The law underpins <strong>space mission planning</strong>, such as orbital insertions and transfers.</li>
+<li>It allows scaling from solar system mechanics to <strong>galactic dynamics</strong>.</li>
+<li>Provides the foundation for <strong>mass-luminosity relations</strong>, exoplanet discovery via <strong>transit and radial velocity methods</strong>, and estimates of <strong>dark matter</strong> from galactic rotation curves.</li>
+</ul>
+<hr/>
+<h1 id="3-real-world-analysis">3. Real-World Analysis</h1>
+<h2 id="31-the-moons-orbit-around-earth">3.1 The Moon’s Orbit Around Earth</h2>
+<p>The Moon's orbit provides a practical example of Kepler's Third Law. Key parameters of the Moon's orbit are:</p>
+<ul>
+<li><strong>Orbital Period</strong>: The Moon completes one orbit around Earth in approximately 27.32166 days (sidereal month) :contentReference[oaicite:0]{index=0}.</li>
+<li><strong>Mean Orbital Radius</strong>: The average distance from the Moon to Earth's center is about 384,400 km :contentReference[oaicite:1]{index=1}.</li>
+</ul>
+<p>Using these values, we can calculate the ratio:</p>
+<div class="arithmatex">\[
+\frac{r^3}{T^2} = \frac{(384,400\ \text{km})^3}{(27.32166\ \text{days})^2}
+\]</div>
+<p>This ratio should be consistent with the gravitational parameter for Earth, confirming the applicability of Kepler's Third Law.</p>
+<hr/>
+<h2 id="32-planetary-orbits-in-the-solar-system">3.2 Planetary Orbits in the Solar System</h2>
+<p>Kepler's Third Law can be examined across the planets in our Solar System. The law states:</p>
+<div class="arithmatex">\[
+\frac{a^3}{T^2} = \text{constant}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\(a\)</span> is the semi-major axis (average orbital radius)
+- <span class="arithmatex">\(T\)</span> is the orbital period</p>
+<p>The following table presents the semi-major axes and orbital periods of the planets:</p>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>Semi-Major Axis (AU)</th>
+<th>Orbital Period (days)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mercury</td>
+<td>0.38710</td>
+<td>87.969</td>
+</tr>
+<tr>
+<td>Venus</td>
+<td>0.72333</td>
+<td>224.701</td>
+</tr>
+<tr>
+<td>Earth</td>
+<td>1.00000</td>
+<td>365.256</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>1.52366</td>
+<td>686.980</td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td>5.20336</td>
+<td>4332.820</td>
+</tr>
+<tr>
+<td>Saturn</td>
+<td>9.53707</td>
+<td>10759.20</td>
+</tr>
+<tr>
+<td>Uranus</td>
+<td>19.1913</td>
+<td>30687.15</td>
+</tr>
+<tr>
+<td>Neptune</td>
+<td>30.0690</td>
+<td>60190.03</td>
+</tr>
+</tbody>
+</table>
+<p>Calculating <span class="arithmatex">\(\frac{a^3}{T^2}\)</span> for each planet yields values that are remarkably consistent, supporting Kepler's Third Law :contentReference[oaicite:2]{index=2}.</p>
+<hr/>
+<h2 id="33-alignment-with-keplers-third-law">3.3 Alignment with Kepler’s Third Law</h2>
+<p>To assess the alignment with Kepler's Third Law, we compute the ratio <span class="arithmatex">\(\frac{a^3}{T^2}\)</span> for each planet:</p>
+<div class="arithmatex">\[
+\frac{a^3}{T^2} \approx 7.5 \times 10^{-6}\ \text{AU}^3/\text{day}^2
+\]</div>
+<p>This consistency across different planets indicates that the square of the orbital period is indeed proportional to the cube of the semi-major axis, as Kepler's Third Law predicts.</p>
+<hr/>
+<h2 id="code-and-plots">Code and Plots</h2>
+<h3 id="keplers-third-law">Kepler's Third Law</h3>
+<p><img alt="alt text" src="../image.png"/></p>
+<pre><code class="language-python"># Import necessary libraries
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the semi-major axes (in AU) and orbital periods (in Earth years) for the planets
+planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+semi_major_axes = [0.387, 0.723, 1.000, 1.524, 5.203, 9.539, 19.191, 30.070]  # Semi-major axes in AU
+orbital_periods = [0.241, 0.615, 1.000, 1.881, 11.862, 29.457, 84.011, 164.791]  # Orbital periods in Earth years
+
+# Compute log10(r^3) and log10(T^2)
+log_r_cubed = np.log10(np.array(semi_major_axes)**3)
+log_T_squared = np.log10(np.array(orbital_periods)**2)
+
+# Create the scatter plot
+plt.figure(figsize=(10, 6))
+plt.scatter(log_r_cubed, log_T_squared, color='blue', label='$T^2 \propto r^3$')
+
+# Annotate each data point with the planet name
+for i, planet in enumerate(planets):
+    plt.annotate(planet, (log_r_cubed[i], log_T_squared[i]), textcoords="offset points", xytext=(5,5), ha='left', va='bottom')
+
+# Customize the plot
+plt.title("Kepler's Third Law: $T^2$ vs. $r^3$ (Log Scale)")
+plt.xlabel('$\log_{10}(r^3)$ ($m^3$)')
+plt.ylabel('$\log_{10}(T^2)$ ($s^2$)')
+plt.grid(True, which="both", ls="--", alpha=0.6)
+plt.legend()
+plt.tight_layout()
+
+# Display the plot
+plt.show()
+</code></pre>
+<h3 id="planet-orbiting-around-the-star">Planet orbiting around the star</h3>
+<p><img alt="alt text" src="../orbit_animation.gif"/></p>
+<pre><code class="language-python"># Step 1: Install imageio for saving GIFs (only needed once in Colab)
+!pip install imageio imageio-ffmpeg --quiet
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import imageio
+from google.colab import files
+
+# Step 2: Set up simulation parameters
+num_frames = 100
+G = 1       # Gravitational constant (simplified)
+M = 1       # Mass of the star
+omega = 0.1  # Angular velocity
+
+# Generate time frames
+theta = np.linspace(0, 2 * np.pi, num_frames)
+
+# Circular orbit coordinates for the planet
+def orbit(theta):
+    r = 5  # radius of orbit
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
+    return x, y
+
+# Step 3: Create figure and axis
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_aspect('equal')
+ax.set_xlim(-10, 10)
+ax.set_ylim(-10, 10)
+ax.set_facecolor('black')
+plt.axis('off')
+
+# Star at center
+star, = ax.plot(0, 0, 'yo', markersize=15, label='Star')
+
+# Planet
+planet, = ax.plot([], [], 'bo', markersize=8, label='Planet')
+
+# Orbit path
+orbit_path, = ax.plot([], [], 'gray', linestyle='--', linewidth=1)
+
+# Step 4: Update function for animation
+def update(frame):
+    x_p, y_p = orbit(theta[frame])
+    planet.set_data([x_p], [y_p])  # Wrap in list to make it a sequence
+
+    # Draw full orbit path only after first frame
+    if frame &gt; 0:
+        x_orbit = [orbit(theta[i])[0] for i in range(frame)]
+        y_orbit = [orbit(theta[i])[1] for i in range(frame)]
+        orbit_path.set_data(x_orbit, y_orbit)
+    else:
+        orbit_path.set_data([], [])
+
+    return planet, orbit_path,
+
+# Step 5: Animate
+ani = FuncAnimation(fig, update, frames=num_frames, interval=50, blit=True)
+
+# Step 6: Save as GIF
+filename = 'orbit_animation.gif'
+ani.save(filename, writer='pillow', fps=20)
+
+# Step 7: Download the GIF
+files.download(filename)
+</code></pre>
+<h2 id="colab">Colab</h2>
+<p><a href="https://colab.research.google.com/drive/1WXC805qI_5BHX58HQMAfDd1XDiF4z1ZN">Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
