@@ -111,7 +111,7 @@ $$R = \frac{v_0^2 \sin 2\theta}{g}$$
 
 where:
 - $v_0$ is the initial velocity,
-- $	heta$ is the angle of projection,
+- $heta$ is the angle of projection,
 - $g$ is the acceleration due to gravity.
 
 ### **Analysis:**
