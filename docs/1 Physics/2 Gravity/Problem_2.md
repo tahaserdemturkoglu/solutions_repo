@@ -74,9 +74,10 @@ $$
 |----------------------------------|--------------------------|--------------------------|------------------------|
 | Mass ($M$)                       | $5.972 \times 10^{24}$ kg | $6.417 \times 10^{23}$ kg | $1.898 \times 10^{27}$ kg |
 | Radius ($r$)                     | $6.371 \times 10^6$ m     | $3.390 \times 10^6$ m     | $6.991 \times 10^7$ m   |
-| Gravitational Constant ($G$)     | \ multicolumn{3}{c}{$6.67430 \times 10^{-11} \ \mathrm{m}^3 \, \mathrm{kg}^{-1} \, \mathrm{s}^{-2}$} |
+| **Gravitational Constant ($G$)** | \multicolumn{3}{c}{$6.67430 \times 10^{-11} \ \mathrm{m}^3 \, \mathrm{kg}^{-1} \, \mathrm{s}^{-2}$} |
 | Escape Velocity ($v_2$)          | $11.2 \ \mathrm{km/s}$    | $5.0 \ \mathrm{km/s}$     | $59.5 \ \mathrm{km/s}$  |
 | Orbital Velocity ($v_1$)         | $7.9 \ \mathrm{km/s}$     | $3.6 \ \mathrm{km/s}$     | $42.1 \ \mathrm{km/s}$  |
+
 
 ---
 
