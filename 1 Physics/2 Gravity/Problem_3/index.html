@@ -252,33 +252,33 @@
 <p>In this section, we discuss the numerical methods used to solve the differential equations of motion for a payload under the influence of Earth’s gravitational field. The goal is to simulate the payload’s trajectory using a numerical approach and validate the results against known analytical expectations, such as a circular orbit.</p>
 <h2 id="1-selecting-a-numerical-method">1. Selecting a Numerical Method</h2>
 <p>To solve the equations of motion numerically, we will use the <strong>Runge-Kutta method</strong>, specifically the <strong>4th-order Runge-Kutta (RK4)</strong> method. This is a widely used method for solving ordinary differential equations (ODEs) because it offers a good balance between accuracy and computational efficiency.</p>
-<p>The general form of the Runge-Kutta method for a first-order differential equation $ \frac{dy}{dt} = f(t, y) $ is:</p>
+<p>The general form of the Runge-Kutta method for a first-order differential equation <span class="arithmatex">\(\frac{dy}{dt} = f(t, y)\)</span> is:</p>
 <div class="arithmatex">\[ y_{n+1} = y_n + \frac{h}{6} \left( k_1 + 2k_2 + 2k_3 + k_4 \right) \]</div>
 <p>Where:
-- $ h $ is the step size,
-- $ k_1 = f(t_n, y_n) $,
-- $ k_2 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_1) $,
-- $ k_3 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_2) $,
-- $ k_4 = f(t_n + h, y_n + h k_3) $.</p>
+- <span class="arithmatex">\(h\)</span> is the step size,
+- <span class="arithmatex">\(k_1 = f(t_n, y_n)\)</span>,
+- <span class="arithmatex">\(k_2 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_1)\)</span>,
+- <span class="arithmatex">\(k_3 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_2)\)</span>,
+- <span class="arithmatex">\(k_4 = f(t_n + h, y_n + h k_3)\)</span>.</p>
 <p>Alternatively, the <strong>Euler method</strong> can be used as a simpler, though less accurate, numerical method:</p>
 <div class="arithmatex">\[ y_{n+1} = y_n + h f(t_n, y_n) \]</div>
 <p>While Euler’s method is easier to implement, it requires smaller step sizes for stability and is less accurate than Runge-Kutta, especially for more complex systems.</p>
 <h2 id="2-setting-up-initial-conditions">2. Setting Up Initial Conditions</h2>
 <p>The initial conditions for the payload’s trajectory must include the position vector, velocity vector, and altitude. We assume the payload is launched from a specific location near Earth’s surface.</p>
-<p>Let the initial position vector $ \mathbf{r}_0 $ be:</p>
+<p>Let the initial position vector <span class="arithmatex">\(\mathbf{r}_0\)</span> be:</p>
 <div class="arithmatex">\[ \mathbf{r}_0 = \begin{bmatrix} r_{x0} \\ r_{y0} \\ r_{z0} \end{bmatrix} \]</div>
-<p>Let the initial velocity vector $ \mathbf{v}_0 $ be:</p>
+<p>Let the initial velocity vector <span class="arithmatex">\(\mathbf{v}_0\)</span> be:</p>
 <div class="arithmatex">\[ \mathbf{v}_0 = \begin{bmatrix} v_{x0} \\ v_{y0} \\ v_{z0} \end{bmatrix} \]</div>
-<p>The altitude $ h_0 $ can be calculated as the distance from the center of Earth:</p>
+<p>The altitude <span class="arithmatex">\(h_0\)</span> can be calculated as the distance from the center of Earth:</p>
 <div class="arithmatex">\[ h_0 = \sqrt{r_{x0}^2 + r_{y0}^2 + r_{z0}^2} - R_E \]</div>
-<p>Where $ R_E $ is the radius of Earth.</p>
+<p>Where <span class="arithmatex">\(R_E\)</span> is the radius of Earth.</p>
 <p>The equations of motion under the influence of Earth's gravitational field are given by Newton’s second law:</p>
 <div class="arithmatex">\[ \mathbf{F} = m \mathbf{a} = - \frac{G M_E m}{r^2} \hat{r} \]</div>
 <p>Where:
-- $ G $ is the gravitational constant,
-- $ M_E $ is the mass of Earth,
-- $ r $ is the magnitude of the position vector $ \mathbf{r} $,
-- $ \hat{r} $ is the unit vector in the direction of $ \mathbf{r} $.</p>
+- <span class="arithmatex">\(G\)</span> is the gravitational constant,
+- <span class="arithmatex">\(M_E\)</span> is the mass of Earth,
+- <span class="arithmatex">\(r\)</span> is the magnitude of the position vector <span class="arithmatex">\(\mathbf{r}\)</span>,
+- <span class="arithmatex">\(\hat{r}\)</span> is the unit vector in the direction of <span class="arithmatex">\(\mathbf{r}\)</span>.</p>
 <p>This force is used to update the velocity and position of the payload during each step of the numerical integration.</p>
 <h2 id="3-computing-the-payloads-path">3. Computing the Payload's Path</h2>
 <p>Using the initial conditions and the numerical method chosen (e.g., Runge-Kutta), we compute the trajectory of the payload over time. The numerical method will integrate the equations of motion iteratively.</p>
@@ -286,22 +286,22 @@
 <div class="arithmatex">\[ \mathbf{r}_{n+1} = \mathbf{r}_n + h \mathbf{v}_n \]</div>
 <div class="arithmatex">\[ \mathbf{v}_{n+1} = \mathbf{v}_n + h \frac{\mathbf{F}_n}{m} \]</div>
 <p>Where:
-- $ \mathbf{r}_n $ and $ \mathbf{v}_n $ are the position and velocity at the current time step,
-- $ h $ is the step size,
-- $ \mathbf{F}_n $ is the gravitational force at the current position.</p>
+- <span class="arithmatex">\(\mathbf{r}_n\)</span> and <span class="arithmatex">\(\mathbf{v}_n\)</span> are the position and velocity at the current time step,
+- <span class="arithmatex">\(h\)</span> is the step size,
+- <span class="arithmatex">\(\mathbf{F}_n\)</span> is the gravitational force at the current position.</p>
 <p>We continue this process until we reach the desired time, at which point we will have a complete trajectory.</p>
 <h2 id="4-validating-numerical-results">4. Validating Numerical Results</h2>
 <p>After solving for the trajectory using the numerical method, we validate the results against known analytical expectations. For example, in the case of a <strong>circular orbit</strong>, the trajectory should maintain a constant radial distance from the center of Earth.</p>
 <p>In a circular orbit, the orbital velocity is constant and is given by:</p>
 <div class="arithmatex">\[ v_{\text{circular}} = \sqrt{\frac{G M_E}{r}} \]</div>
 <p>Where:
-- $ r $ is the orbital radius.</p>
+- <span class="arithmatex">\(r\)</span> is the orbital radius.</p>
 <p>We can compare the computed velocity at each point along the trajectory with this theoretical velocity for a circular orbit.</p>
 <p>For an <strong>elliptical orbit</strong>, we check if the computed trajectory satisfies Kepler’s Laws, especially the law of equal areas, which implies that the object should sweep out equal areas during equal time intervals.</p>
 <p>In the case of more complex orbits or escape trajectories, we verify that the object’s velocity exceeds the escape velocity at the correct point, leading to a trajectory that no longer returns to Earth.</p>
 <h3 id="example-circular-orbit-validation">Example: Circular Orbit Validation</h3>
 <p>For a payload in a circular orbit at an altitude of 300 km above the Earth's surface, we expect the following conditions:
-- The radius from the center of Earth is $ r = R_E + 300 \, \text{km} $,
+- The radius from the center of Earth is <span class="arithmatex">\(r = R_E + 300 \, \text{km}\)</span>,
 - The orbital velocity should match the theoretical velocity:</p>
 <div class="arithmatex">\[ v_{\text{orbital}} = \sqrt{\frac{G M_E}{R_E + 300}} \]</div>
 <h2 id="by-comparing-the-computed-velocity-at-each-time-step-with-this-value-we-can-verify-the-accuracy-of-our-numerical-solution">By comparing the computed velocity at each time step with this value, we can verify the accuracy of our numerical solution.</h2>
