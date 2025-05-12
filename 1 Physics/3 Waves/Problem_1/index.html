@@ -172,6 +172,397 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="problem-setup-coherent-wave-sources-on-a-regular-polygon">Problem Setup: Coherent Wave Sources on a Regular Polygon</h1>
+<h2 id="1-geometric-configuration">1. Geometric Configuration</h2>
+<p>We begin by selecting a regular polygon with <span class="arithmatex">\(N\)</span> vertices. Each vertex is assigned a coherent point wave source. Common choices include:</p>
+<ul>
+<li>Equilateral triangle (<span class="arithmatex">\(N = 3\)</span>)</li>
+<li>Square (<span class="arithmatex">\(N = 4\)</span>)</li>
+<li>Regular pentagon (<span class="arithmatex">\(N = 5\)</span>)</li>
+</ul>
+<p>Assume the polygon is inscribed in a circle of radius <span class="arithmatex">\(R\)</span>, centered at the origin <span class="arithmatex">\((0, 0)\)</span>. The position <span class="arithmatex">\(\vec{r}_n\)</span> of the <span class="arithmatex">\(n\)</span>-th source is given in Cartesian coordinates by:</p>
+<div class="arithmatex">\[
+\vec{r}_n = R \begin{bmatrix}
+\cos\left( \theta_n \right) \\
+\sin\left( \theta_n \right)
+\end{bmatrix}, \quad \theta_n = \frac{2\pi n}{N}, \quad n = 0, 1, \dots, N-1
+\]</div>
+<p>Each point source emits a spherical (or circular, in 2D) wave centered at <span class="arithmatex">\(\vec{r}_n\)</span>.</p>
+<hr/>
+<h2 id="2-wave-parameters">2. Wave Parameters</h2>
+<p>All sources emit waves that are <strong>coherent</strong>, meaning they share identical physical properties:</p>
+<ul>
+<li><strong>Amplitude</strong>: <span class="arithmatex">\(A\)</span></li>
+<li><strong>Wavelength</strong>: <span class="arithmatex">\(\lambda\)</span></li>
+<li><strong>Frequency</strong>: <span class="arithmatex">\(f\)</span></li>
+<li><strong>Initial Phase</strong>: <span class="arithmatex">\(\phi_0\)</span> (same for all)</li>
+</ul>
+<p>The wavenumber <span class="arithmatex">\(k\)</span> and angular frequency <span class="arithmatex">\(\omega\)</span> are defined by:</p>
+<div class="arithmatex">\[
+k = \frac{2\pi}{\lambda}, \quad \omega = 2\pi f
+\]</div>
+<p>Each source emits a wave of the form:</p>
+<div class="arithmatex">\[
+\psi_n(\vec{r}, t) = A \cdot \frac{1}{|\vec{r} - \vec{r}_n|} \cdot \cos\left( k |\vec{r} - \vec{r}_n| - \omega t + \phi_0 \right)
+\]</div>
+<p>In 2D, the <span class="arithmatex">\(1/|\vec{r} - \vec{r}_n|\)</span> decay can be replaced by a logarithmic or Bessel-type function depending on boundary conditions and dimensionality, but for simplicity, we retain the inverse-distance decay.</p>
+<hr/>
+<h2 id="3-superposition-principle">3. Superposition Principle</h2>
+<p>The total wave field at a point <span class="arithmatex">\(\vec{r}\)</span> is the superposition of the fields from all <span class="arithmatex">\(N\)</span> sources:</p>
+<div class="arithmatex">\[
+\Psi(\vec{r}, t) = \sum_{n=0}^{N-1} \psi_n(\vec{r}, t)
+\]</div>
+<p>Since all sources are coherent, interference patterns will emerge due to the phase differences arising from different path lengths.</p>
+<hr/>
+<h2 id="4-simplified-case-far-field-approximation">4. Simplified Case: Far-Field Approximation</h2>
+<p>In the far-field regime (<span class="arithmatex">\(|\vec{r}| \gg R\)</span>), the distance approximation becomes:</p>
+<div class="arithmatex">\[
+|\vec{r} - \vec{r}_n| \approx r - \hat{r} \cdot \vec{r}_n
+\]</div>
+<p>where <span class="arithmatex">\(\hat{r} = \vec{r} / |\vec{r}|\)</span> is the unit vector in the observation direction. The wave from each source becomes:</p>
+<div class="arithmatex">\[
+\psi_n(\vec{r}, t) \approx \frac{A}{r} \cos\left( k r - k \hat{r} \cdot \vec{r}_n - \omega t + \phi_0 \right)
+\]</div>
+<p>And the total field becomes:</p>
+<div class="arithmatex">\[
+\Psi(\vec{r}, t) \approx \frac{A}{r} \sum_{n=0}^{N-1} \cos\left( k r - k \hat{r} \cdot \vec{r}_n - \omega t + \phi_0 \right)
+\]</div>
+<p>This form is useful for analyzing angular interference patterns and diffraction lobes.</p>
+<hr/>
+<h2 id="5-summary-of-parameters">5. Summary of Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(N\)</span></td>
+<td>Number of wave sources</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(R\)</span></td>
+<td>Radius of circumscribed circle</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\)</span></td>
+<td>Amplitude of each wave</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td>Wavelength</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f\)</span></td>
+<td>Frequency</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\phi_0\)</span></td>
+<td>Initial phase (common)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(k\)</span></td>
+<td>Wavenumber, <span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\omega\)</span></td>
+<td>Angular frequency, <span class="arithmatex">\(\omega = 2\pi f\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<blockquote>
+<p><strong>Note:</strong> These notes assume ideal, isotropic, and lossless wave propagation. Further analysis may consider boundary effects, damping, or nonlinearity.</p>
+</blockquote>
+<hr/>
+<h1 id="mathematical-formulation">Mathematical Formulation</h1>
+<p>We now formally describe the wave behavior generated by multiple coherent point sources located at the vertices of a regular polygon.</p>
+<hr/>
+<h2 id="1-single-point-source-wave-equation">1. Single Point Source Wave Equation</h2>
+<p>The surface displacement <span class="arithmatex">\(\eta(\vec{r}, t)\)</span> at a point <span class="arithmatex">\(\vec{r} = (x, y)\)</span> on the water surface due to a single point source is described by:</p>
+<div class="arithmatex">\[
+\eta(\vec{r}, t) = A \cos(k r - \omega t + \phi)
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(A\)</span> is the wave amplitude</li>
+<li><span class="arithmatex">\(k\)</span> is the wavenumber: <span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span></li>
+<li><span class="arithmatex">\(\omega\)</span> is the angular frequency: <span class="arithmatex">\(\omega = 2\pi f\)</span></li>
+<li><span class="arithmatex">\(\phi\)</span> is the initial phase</li>
+<li><span class="arithmatex">\(r = |\vec{r} - \vec{r}_i|\)</span> is the distance between the observation point and the source</li>
+</ul>
+<hr/>
+<h2 id="2-wave-equation-for-multiple-sources">2. Wave Equation for Multiple Sources</h2>
+<p>Let there be <span class="arithmatex">\(N\)</span> sources located at positions <span class="arithmatex">\(\vec{r}_i = (x_i, y_i)\)</span> for <span class="arithmatex">\(i = 0, 1, ..., N-1\)</span>. The distance from the <span class="arithmatex">\(i\)</span>-th source to a point <span class="arithmatex">\((x, y)\)</span> on the water surface is:</p>
+<div class="arithmatex">\[
+r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}
+\]</div>
+<p>The surface displacement due to the <span class="arithmatex">\(i\)</span>-th source is then:</p>
+<div class="arithmatex">\[
+\eta_i(x, y, t) = A \cos(k r_i - \omega t + \phi)
+\]</div>
+<p>Since all sources are coherent and have the same amplitude <span class="arithmatex">\(A\)</span>, wavelength <span class="arithmatex">\(\lambda\)</span>, frequency <span class="arithmatex">\(f\)</span>, and initial phase <span class="arithmatex">\(\phi\)</span>, the only variable is the distance <span class="arithmatex">\(r_i\)</span>.</p>
+<hr/>
+<h2 id="3-total-surface-displacement-by-superposition">3. Total Surface Displacement by Superposition</h2>
+<p>Using the linear superposition principle, the total displacement at point <span class="arithmatex">\((x, y)\)</span> and time <span class="arithmatex">\(t\)</span> due to all <span class="arithmatex">\(N\)</span> sources is:</p>
+<div class="arithmatex">\[
+\eta_{\text{total}}(x, y, t) = \sum_{i=0}^{N-1} \eta_i(x, y, t)
+\]</div>
+<p>Substituting the individual waveforms:</p>
+<div class="arithmatex">\[
+\eta_{\text{total}}(x, y, t) = \sum_{i=0}^{N-1} A \cos\left(k \sqrt{(x - x_i)^2 + (y - y_i)^2} - \omega t + \phi \right)
+\]</div>
+<p>This expression gives the instantaneous surface profile of the water at any point <span class="arithmatex">\((x, y)\)</span> and time <span class="arithmatex">\(t\)</span> due to multiple coherent sources.</p>
+<hr/>
+<h2 id="4-key-definitions-recap">4. Key Definitions Recap</h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A\)</span></td>
+<td>Amplitude of each wave</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td>Wavelength</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f\)</span></td>
+<td>Frequency</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(k\)</span></td>
+<td>Wavenumber, <span class="arithmatex">\(k = \dfrac{2\pi}{\lambda}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\omega\)</span></td>
+<td>Angular frequency, <span class="arithmatex">\(\omega = 2\pi f\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\phi\)</span></td>
+<td>Initial phase (identical for all)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((x_i, y_i)\)</span></td>
+<td>Coordinates of source <span class="arithmatex">\(i\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((x, y)\)</span></td>
+<td>Observation point on the surface</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(r_i\)</span></td>
+<td>Distance from source <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\((x, y)\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<blockquote>
+<p><strong>Note:</strong> This formulation assumes the medium is homogeneous, isotropic, and supports linear wave propagation. Nonlinear or dissipative effects are neglected in this model.</p>
+</blockquote>
+<hr/>
+<h1 id="3-interference-analysis">3. Interference Analysis</h1>
+<p>Interference arises when multiple coherent wave sources overlap spatially and temporally. The resulting surface displacement <span class="arithmatex">\(\eta_{\text{total}}(x, y, t)\)</span> is the sum of individual contributions from each source, leading to patterns of constructive and destructive interference.</p>
+<hr/>
+<h2 id="31-constructive-interference">3.1 Constructive Interference</h2>
+<p><strong>Constructive interference</strong> occurs at points where the phase difference between waves from different sources is an integer multiple of <span class="arithmatex">\(2\pi\)</span>:</p>
+<div class="arithmatex">\[
+k(r_i - r_j) = 2\pi m, \quad m \in \mathbb{Z}
+\]</div>
+<p>This simplifies to:</p>
+<div class="arithmatex">\[
+r_i - r_j = m \lambda
+\]</div>
+<p>At such points, the cosine terms align in phase, reinforcing each other. The amplitude of the total wave displacement is maximized.</p>
+<h3 id="conditions">Conditions:</h3>
+<ul>
+<li>Equal distances from the observation point to multiple sources (or integer-multiple differences)</li>
+<li><span class="arithmatex">\(\eta_{\text{total}}(x, y, t)\)</span> reaches local maxima</li>
+</ul>
+<hr/>
+<h2 id="32-destructive-interference">3.2 Destructive Interference</h2>
+<p><strong>Destructive interference</strong> occurs when the phase difference between sources equals an odd multiple of <span class="arithmatex">\(\pi\)</span>:</p>
+<div class="arithmatex">\[
+k(r_i - r_j) = (2m + 1)\pi, \quad m \in \mathbb{Z}
+\]</div>
+<p>This implies:</p>
+<div class="arithmatex">\[
+r_i - r_j = \left(m + \frac{1}{2}\right)\lambda
+\]</div>
+<p>Waves at these points arrive out of phase and cancel, resulting in minimal or zero net displacement.</p>
+<h3 id="conditions_1">Conditions:</h3>
+<ul>
+<li>Half-wavelength path differences</li>
+<li>Phase opposition leads to amplitude nullification</li>
+</ul>
+<hr/>
+<h2 id="33-spatial-and-temporal-dependence">3.3 Spatial and Temporal Dependence</h2>
+<p>The total wave field depends on both <strong>position</strong> <span class="arithmatex">\((x, y)\)</span> and <strong>time</strong> <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[
+\eta_{\text{total}}(x, y, t) = \sum_{i=0}^{N-1} A \cos\left(k r_i(x, y) - \omega t + \phi\right)
+\]</div>
+<p>At any fixed <span class="arithmatex">\(t\)</span>, the <strong>spatial pattern</strong> of interference can be analyzed as a standing wave pattern formed by overlapping traveling waves.</p>
+<p>Over time, these patterns <strong>oscillate sinusoidally</strong>, but their constructive/destructive regions remain <strong>fixed in space</strong> unless the wave properties or source positions change.</p>
+<hr/>
+<h2 id="34-effect-of-polygon-geometry">3.4 Effect of Polygon Geometry</h2>
+<p>The <strong>geometry of the regular polygon</strong> significantly influences the interference pattern:</p>
+<ul>
+<li><strong>Symmetry</strong>: Regular polygons induce <strong>radial and rotational symmetry</strong> in the interference field.</li>
+<li><strong>Number of Sides (<span class="arithmatex">\(N\)</span>)</strong>: More sources increase complexity and introduce <strong>higher angular harmonics</strong> in the interference pattern.</li>
+<li><strong>Vertex Spacing</strong>: As vertices become more densely packed (e.g., larger <span class="arithmatex">\(N\)</span>), interference fringes become finer and more numerous.</li>
+</ul>
+<p>For instance:</p>
+<ul>
+<li>A <strong>triangle</strong> (<span class="arithmatex">\(N = 3\)</span>) creates broad, triangularly symmetric lobes.</li>
+<li>A <strong>square</strong> (<span class="arithmatex">\(N = 4\)</span>) induces fourfold symmetry and checkerboard-like regions of interference.</li>
+<li>A <strong>pentagon</strong> (<span class="arithmatex">\(N = 5\)</span>) yields complex, star-like interference fields due to irrational angle multiples.</li>
+</ul>
+<p>These effects stem from the phase differences governed by:</p>
+<div class="arithmatex">\[
+r_i(x, y) = \sqrt{(x - x_i)^2 + (y - y_i)^2}
+\]</div>
+<p>which depend on the geometric layout of source positions <span class="arithmatex">\(\{(x_i, y_i)\}\)</span>.</p>
+<hr/>
+<blockquote>
+<p><strong>Conclusion:</strong> Interference is governed by the superposition of coherent waves with fixed phase relationships. Geometry plays a central role, and the resulting spatial interference pattern reflects both the physical arrangement and the wave parameters.</p>
+</blockquote>
+<hr/>
+<h2 id="code-and-plots">Code and Plots</h2>
+<p><img alt="alt text" src="../image.png"/></p>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<p><img alt="alt text" src="../image-3.png"/></p>
+<p><img alt="alt text" src="../image-4.png"/></p>
+<pre><code class="language-python"># Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+from matplotlib.animation import FuncAnimation, PillowWriter
+import plotly.graph_objects as go
+from IPython.display import HTML
+
+# Constants
+c = 1.0  # Wave speed
+f = 1.0  # Frequency
+λ = c / f  # Wavelength
+k = 2 * np.pi / λ  # Wave number
+ω = 2 * np.pi * f  # Angular frequency
+
+# Grid setup
+x = np.linspace(-10, 10, 500)
+y = np.linspace(-10, 10, 500)
+X, Y = np.meshgrid(x, y)
+
+# Function to compute wave from a single source
+def wave_from_source(X, Y, x0, y0, t):
+    r = np.sqrt((X - x0)**2 + (Y - y0)**2)
+    return np.sin(k * r - ω * t) / (r + 1e-6)  # Avoid division by zero
+
+# Function to compute total wave from multiple sources
+def total_wave(X, Y, sources, t):
+    total = np.zeros_like(X)
+    for x0, y0 in sources:
+        total += wave_from_source(X, Y, x0, y0, t)
+    return total
+
+# Plot heatmap for a single source
+def plot_single_source_heatmap():
+    Z = wave_from_source(X, Y, 0, 0, 0)
+    plt.figure(figsize=(8, 6))
+    plt.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()], origin='lower', cmap='viridis')
+    plt.colorbar(label='Amplitude')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Wave from Single Source (Heatmap)')
+    plt.show()
+
+# Plot 3D surface for a single source
+def plot_single_source_3d():
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    Z = wave_from_source(X, Y, 0, 0, 0)
+    surf = ax.plot_surface(X, Y, Z, cmap=cm.viridis, linewidth=0, antialiased=True)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Amplitude')
+    ax.set_title('Wave from Single Source (3D Surface)')
+    plt.show()
+
+# Plot heatmap for multiple sources
+def plot_multiple_sources_heatmap(sources):
+    Z = total_wave(X, Y, sources, 0)
+    plt.figure(figsize=(8, 6))
+    plt.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()], origin='lower', cmap='viridis')
+    plt.colorbar(label='Amplitude')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title(f'Wave from {len(sources)} Sources (Heatmap)')
+    plt.show()
+
+# Animation function for heatmaps
+def animate_heatmap(sources):
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    def update(frame):
+        t = frame / 10.0  # Time progression
+        Z = total_wave(X, Y, sources, t)
+        im.set_array(Z)
+        return im,
+
+    Z = total_wave(X, Y, sources, 0)
+    im = ax.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()], origin='lower', cmap='viridis')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_title(f'Wave from {len(sources)} Sources (Heatmap)')
+    cbar = plt.colorbar(im, label='Amplitude')
+
+    ani = FuncAnimation(fig, update, frames=np.arange(0, 50), interval=50)
+    plt.close()
+    return ani
+
+# Main execution
+if __name__ == "__main__":
+    # Single source: Heatmap and 3D plot
+    plot_single_source_heatmap()
+    plot_single_source_3d()
+
+    # Two sources: Heatmap and animation
+    sources_2 = [(-3, 0), (3, 0)]
+    plot_multiple_sources_heatmap(sources_2)
+    ani_2 = animate_heatmap(sources_2)
+    HTML(ani_2.to_html5_video())
+
+    # Three sources (triangle): Heatmap and animation
+    sources_3 = [
+        (-3, 0),
+        (3, 0),
+        (0, 3 * np.sqrt(3))
+    ]
+    plot_multiple_sources_heatmap(sources_3)
+    ani_3 = animate_heatmap(sources_3)
+    HTML(ani_3.to_html5_video())
+
+    # Four sources (square): Heatmap and animation
+    sources_4 = [
+        (-3, -3),
+        (3, -3),
+        (3, 3),
+        (-3, 3)
+    ]
+    plot_multiple_sources_heatmap(sources_4)
+    ani_4 = animate_heatmap(sources_4)
+    HTML(ani_4.to_html5_video())
+</code></pre>
+<h2 id="colab">Colab</h2>
+<p><a href="https://colab.research.google.com/drive/1AWV-oilAWbeQCu7teH2DJ_UDFWVFao3C">Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
