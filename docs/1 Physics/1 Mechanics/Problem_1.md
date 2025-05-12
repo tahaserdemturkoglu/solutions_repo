@@ -105,7 +105,7 @@ These equations provide a foundation for further analysis, including air resista
 
 ## **Dependence of Range on Angle of Projection**
 
-The range $R$ of a projectile launched with an initial velocity $v_0$ at an angle $	heta$ from the horizontal is given by the equation:
+The range $R$ of a projectile launched with an initial velocity $v_0$ at an angle $heta$ from the horizontal is given by the equation:
 
 $$R = \frac{v_0^2 \sin 2\theta}{g}$$
 
