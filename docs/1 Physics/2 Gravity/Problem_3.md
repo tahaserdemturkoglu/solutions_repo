@@ -113,16 +113,16 @@ In this section, we discuss the numerical methods used to solve the differential
 ## 1. Selecting a Numerical Method
 To solve the equations of motion numerically, we will use the **Runge-Kutta method**, specifically the **4th-order Runge-Kutta (RK4)** method. This is a widely used method for solving ordinary differential equations (ODEs) because it offers a good balance between accuracy and computational efficiency.
 
-The general form of the Runge-Kutta method for a first-order differential equation $ \frac{dy}{dt} = f(t, y) $ is:
+The general form of the Runge-Kutta method for a first-order differential equation $\frac{dy}{dt} = f(t, y)$ is:
 
 $$ y_{n+1} = y_n + \frac{h}{6} \left( k_1 + 2k_2 + 2k_3 + k_4 \right) $$
 
 Where:
-- $ h $ is the step size,
-- $ k_1 = f(t_n, y_n) $,
-- $ k_2 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_1) $,
-- $ k_3 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_2) $,
-- $ k_4 = f(t_n + h, y_n + h k_3) $.
+- $h$ is the step size,
+- $k_1 = f(t_n, y_n)$,
+- $k_2 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_1)$,
+- $k_3 = f(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_2)$,
+- $k_4 = f(t_n + h, y_n + h k_3)$.
 
 Alternatively, the **Euler method** can be used as a simpler, though less accurate, numerical method:
 
@@ -133,29 +133,29 @@ While Euler’s method is easier to implement, it requires smaller step sizes fo
 ## 2. Setting Up Initial Conditions
 The initial conditions for the payload’s trajectory must include the position vector, velocity vector, and altitude. We assume the payload is launched from a specific location near Earth’s surface.
 
-Let the initial position vector $ \mathbf{r}_0 $ be:
+Let the initial position vector $\mathbf{r}_0$ be:
 
 $$ \mathbf{r}_0 = \begin{bmatrix} r_{x0} \\ r_{y0} \\ r_{z0} \end{bmatrix} $$
 
-Let the initial velocity vector $ \mathbf{v}_0 $ be:
+Let the initial velocity vector $\mathbf{v}_0$ be:
 
 $$ \mathbf{v}_0 = \begin{bmatrix} v_{x0} \\ v_{y0} \\ v_{z0} \end{bmatrix} $$
 
-The altitude $ h_0 $ can be calculated as the distance from the center of Earth:
+The altitude $h_0$ can be calculated as the distance from the center of Earth:
 
 $$ h_0 = \sqrt{r_{x0}^2 + r_{y0}^2 + r_{z0}^2} - R_E $$
 
-Where $ R_E $ is the radius of Earth.
+Where $R_E$ is the radius of Earth.
 
 The equations of motion under the influence of Earth's gravitational field are given by Newton’s second law:
 
 $$ \mathbf{F} = m \mathbf{a} = - \frac{G M_E m}{r^2} \hat{r} $$
 
 Where:
-- $ G $ is the gravitational constant,
-- $ M_E $ is the mass of Earth,
-- $ r $ is the magnitude of the position vector $ \mathbf{r} $,
-- $ \hat{r} $ is the unit vector in the direction of $ \mathbf{r} $.
+- $G$ is the gravitational constant,
+- $M_E$ is the mass of Earth,
+- $r$ is the magnitude of the position vector $\mathbf{r}$,
+- $\hat{r}$ is the unit vector in the direction of $\mathbf{r}$.
 
 This force is used to update the velocity and position of the payload during each step of the numerical integration.
 
@@ -169,9 +169,9 @@ $$ \mathbf{r}_{n+1} = \mathbf{r}_n + h \mathbf{v}_n $$
 $$ \mathbf{v}_{n+1} = \mathbf{v}_n + h \frac{\mathbf{F}_n}{m} $$
 
 Where:
-- $ \mathbf{r}_n $ and $ \mathbf{v}_n $ are the position and velocity at the current time step,
-- $ h $ is the step size,
-- $ \mathbf{F}_n $ is the gravitational force at the current position.
+- $\mathbf{r}_n$ and $\mathbf{v}_n$ are the position and velocity at the current time step,
+- $h$ is the step size,
+- $\mathbf{F}_n$ is the gravitational force at the current position.
 
 We continue this process until we reach the desired time, at which point we will have a complete trajectory.
 
@@ -183,7 +183,7 @@ In a circular orbit, the orbital velocity is constant and is given by:
 $$ v_{\text{circular}} = \sqrt{\frac{G M_E}{r}} $$
 
 Where:
-- $ r $ is the orbital radius.
+- $r$ is the orbital radius.
 
 We can compare the computed velocity at each point along the trajectory with this theoretical velocity for a circular orbit.
 
@@ -193,7 +193,7 @@ In the case of more complex orbits or escape trajectories, we verify that the ob
 
 ### Example: Circular Orbit Validation
 For a payload in a circular orbit at an altitude of 300 km above the Earth's surface, we expect the following conditions:
-- The radius from the center of Earth is $ r = R_E + 300 \, \text{km} $,
+- The radius from the center of Earth is $r = R_E + 300 \, \text{km}$,
 - The orbital velocity should match the theoretical velocity:
 
 $$ v_{\text{orbital}} = \sqrt{\frac{G M_E}{R_E + 300}} $$
