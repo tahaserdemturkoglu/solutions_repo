@@ -115,9 +115,9 @@ where:
 - $g$ is the acceleration due to gravity.
 
 ### **Analysis:**
-- The range $R$ is maximized when $\sin 2	heta = 1$, which occurs at $2	heta = 90^\circ$, or $	heta = 45^\circ$.
-- For angles $	heta > 45^\circ$ or $	heta < 45^\circ$, the range decreases.
-- The function $\sin 2	heta$ is symmetric about $45^\circ$, meaning that angles $	heta$ and $90^\circ - 	heta$ produce the same range.
+- The range $R$ is maximized when $\sin 2	heta = 1$, which occurs at $2	heta = 90^\circ$, or $heta = 45^\circ$.
+- For angles $heta > 45^\circ$ or $heta < 45^\circ$, the range decreases.
+- The function $\sin 2	heta$ is symmetric about $45^\circ$, meaning that angles $heta$ and $90^\circ - 	heta$ produce the same range.
 
 ## **Effect of Initial Velocity and Gravitational Acceleration on Range**
 
