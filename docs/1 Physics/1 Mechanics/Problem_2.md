@@ -411,7 +411,7 @@ The rich dynamic behavior of the forced damped pendulum informs:
 
 ### Pendulum Visualizations
 
-![alt text](image-4.png)
+![alt text](image-5.png)
 
 ```python
 import numpy as np
@@ -439,74 +439,79 @@ def simple_pendulum(t, y):
     domega_dt = -(g / L) * np.sin(theta)
     return [dtheta_dt, domega_dt]
 
-# Solve the ODE for the simple pendulum
 sol_simple = solve_ivp(simple_pendulum, t_span, y0, t_eval=t_eval)
 
 # 2) Damped Pendulum
 def damped_pendulum(t, y):
     theta, omega = y
-    damping_coefficient = 0.5  # damping coefficient
+    damping_coefficient = 0.5
     dtheta_dt = omega
     domega_dt = -(g / L) * np.sin(theta) - damping_coefficient * omega
     return [dtheta_dt, domega_dt]
 
-# Solve the ODE for the damped pendulum
 sol_damped = solve_ivp(damped_pendulum, t_span, y0, t_eval=t_eval)
 
 # 3) Forced Pendulum
 def forced_pendulum(t, y):
     theta, omega = y
-    forcing_amplitude = 1.5  # amplitude of external force
-    forcing_frequency = 0.67 * omega_0  # frequency of external force
-    damping_coefficient = 0.2  # damping coefficient
+    forcing_amplitude = 1.5
+    forcing_frequency = 0.67 * omega_0
+    damping_coefficient = 0.2
     dtheta_dt = omega
     domega_dt = -(g / L) * np.sin(theta) - damping_coefficient * omega + forcing_amplitude * np.cos(forcing_frequency * t)
     return [dtheta_dt, domega_dt]
 
-# Solve the ODE for the forced pendulum
 sol_forced = solve_ivp(forced_pendulum, t_span, y0, t_eval=t_eval)
 
-# Plotting the results
-fig, axes = plt.subplots(3, 2, figsize=(12, 18))
+# 4) Chaotic Pendulum (double forcing)
+def chaotic_forced_pendulum(t, y):
+    theta, omega = y
+    A1 = 1.2
+    A2 = 1.0
+    f1 = 0.67 * omega_0
+    f2 = np.pi * omega_0  # incommensurate frequency
+    damping_coefficient = 0.3
+    dtheta_dt = omega
+    domega_dt = -(g / L) * np.sin(theta) - damping_coefficient * omega + A1 * np.cos(f1 * t) + A2 * np.cos(f2 * t)
+    return [dtheta_dt, domega_dt]
 
-# 1) Simple Pendulum
-axes[0, 0].plot(sol_simple.t, sol_simple.y[0], color='red', label='θ (rad)')
-axes[0, 0].set_title('1) Simple Pendulum - Time Series')
-axes[0, 0].set_xlabel('Time (s)')
-axes[0, 0].set_ylabel('θ (rad)')
-axes[0, 0].grid(True)
+sol_chaotic = solve_ivp(chaotic_forced_pendulum, t_span, y0, t_eval=t_eval)
 
-axes[0, 1].plot(sol_simple.y[0], sol_simple.y[1], color='red', label='Phase Portrait')
-axes[0, 1].set_title('1) Simple Pendulum - Phase Portrait')
-axes[0, 1].set_xlabel('θ (rad)')
-axes[0, 1].set_ylabel('ω (rad/s)')
-axes[0, 1].grid(True)
+# 5) Near-resonance pendulum
+def near_resonance_pendulum(t, y):
+    theta, omega = y
+    forcing_amplitude = 1.0
+    forcing_frequency = omega_0  # close to resonance
+    damping_coefficient = 0.05  # very light damping
+    dtheta_dt = omega
+    domega_dt = -(g / L) * np.sin(theta) - damping_coefficient * omega + forcing_amplitude * np.cos(forcing_frequency * t)
+    return [dtheta_dt, domega_dt]
 
-# 2) Damped Pendulum
-axes[1, 0].plot(sol_damped.t, sol_damped.y[0], color='purple', label='θ (rad)')
-axes[1, 0].set_title('2) Damped Pendulum - Time Series')
-axes[1, 0].set_xlabel('Time (s)')
-axes[1, 0].set_ylabel('θ (rad)')
-axes[1, 0].grid(True)
+sol_resonance = solve_ivp(near_resonance_pendulum, t_span, y0, t_eval=t_eval)
 
-axes[1, 1].plot(sol_damped.y[0], sol_damped.y[1], color='purple', label='Phase Portrait')
-axes[1, 1].set_title('2) Damped Pendulum - Phase Portrait')
-axes[1, 1].set_xlabel('θ (rad)')
-axes[1, 1].set_ylabel('ω (rad/s)')
-axes[1, 1].grid(True)
+# ---------------------- Plotting ----------------------
+fig, axes = plt.subplots(5, 2, figsize=(14, 24))
 
-# 3) Forced Pendulum
-axes[2, 0].plot(sol_forced.t, sol_forced.y[0], color='cyan', label='θ (rad)')
-axes[2, 0].set_title('3) Forced Pendulum - Time Series')
-axes[2, 0].set_xlabel('Time (s)')
-axes[2, 0].set_ylabel('θ (rad)')
-axes[2, 0].grid(True)
+# Utility to plot each scenario
+def plot_pendulum(ax_time, ax_phase, sol, title_prefix, color):
+    ax_time.plot(sol.t, sol.y[0], color=color)
+    ax_time.set_title(f'{title_prefix} - Time Series')
+    ax_time.set_xlabel('Time (s)')
+    ax_time.set_ylabel('θ (rad)')
+    ax_time.grid(True)
 
-axes[2, 1].plot(sol_forced.y[0], sol_forced.y[1], color='cyan', label='Phase Portrait')
-axes[2, 1].set_title('3) Forced Pendulum - Phase Portrait')
-axes[2, 1].set_xlabel('θ (rad)')
-axes[2, 1].set_ylabel('ω (rad/s)')
-axes[2, 1].grid(True)
+    ax_phase.plot(sol.y[0], sol.y[1], color=color)
+    ax_phase.set_title(f'{title_prefix} - Phase Portrait')
+    ax_phase.set_xlabel('θ (rad)')
+    ax_phase.set_ylabel('ω (rad/s)')
+    ax_phase.grid(True)
+
+# Plot each system
+plot_pendulum(axes[0, 0], axes[0, 1], sol_simple, "1) Simple Pendulum", 'red')
+plot_pendulum(axes[1, 0], axes[1, 1], sol_damped, "2) Damped Pendulum", 'purple')
+plot_pendulum(axes[2, 0], axes[2, 1], sol_forced, "3) Forced Pendulum", 'cyan')
+plot_pendulum(axes[3, 0], axes[3, 1], sol_chaotic, "4) Chaotic Forced Pendulum", 'green')
+plot_pendulum(axes[4, 0], axes[4, 1], sol_resonance, "5) Near-Resonance Pendulum", 'orange')
 
 plt.tight_layout()
 plt.show()
