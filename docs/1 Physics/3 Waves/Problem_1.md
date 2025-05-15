@@ -277,26 +277,23 @@ which depend on the geometric layout of source positions $\{(x_i, y_i)\}$.
 
 ## Code and Plots
 
-
-![alt text](image.png)
-
-![alt text](image-1.png)
-
-![alt text](image-2.png)
-
-![alt text](image-3.png)
-
-![alt text](image-4.png)
+![alt text](<indir (1).gif>)
+![alt text](<indir (2).gif>)
+![alt text](<indir (3).gif>)
+![alt text](<indir (4).gif>)
+![alt text](<indir (5).gif>)
+![alt text](<indir (6).gif>)
 
 ```python
-# Import necessary libraries
+# Install required library
+!pip install -q imageio
+
+# Imports
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
 from matplotlib.animation import FuncAnimation, PillowWriter
-import plotly.graph_objects as go
-from IPython.display import HTML
+from IPython.display import Image, display
+from google.colab import files
 
 # Constants
 c = 1.0  # Wave speed
@@ -305,110 +302,58 @@ f = 1.0  # Frequency
 k = 2 * np.pi / λ  # Wave number
 ω = 2 * np.pi * f  # Angular frequency
 
-# Grid setup
-x = np.linspace(-10, 10, 500)
-y = np.linspace(-10, 10, 500)
+# Grid
+x = np.linspace(-10, 10, 300)
+y = np.linspace(-10, 10, 300)
 X, Y = np.meshgrid(x, y)
 
-# Function to compute wave from a single source
+# Function for a single wave source
 def wave_from_source(X, Y, x0, y0, t):
     r = np.sqrt((X - x0)**2 + (Y - y0)**2)
-    return np.sin(k * r - ω * t) / (r + 1e-6)  # Avoid division by zero
+    return np.sin(k * r - ω * t) / (r + 1e-6)
 
-# Function to compute total wave from multiple sources
+# Combine all waves from sources
 def total_wave(X, Y, sources, t):
     total = np.zeros_like(X)
     for x0, y0 in sources:
         total += wave_from_source(X, Y, x0, y0, t)
     return total
 
-# Plot heatmap for a single source
-def plot_single_source_heatmap():
-    Z = wave_from_source(X, Y, 0, 0, 0)
-    plt.figure(figsize=(8, 6))
-    plt.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()], origin='lower', cmap='viridis')
-    plt.colorbar(label='Amplitude')
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.title('Wave from Single Source (Heatmap)')
-    plt.show()
+# Create regular polygon of sources
+def generate_polygon_sources(n, radius=3):
+    if n == 1:
+        return [(0, 0)]
+    angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
+    return [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
 
-# Plot 3D surface for a single source
-def plot_single_source_3d():
-    fig = plt.figure(figsize=(8, 6))
-    ax = fig.add_subplot(111, projection='3d')
-    Z = wave_from_source(X, Y, 0, 0, 0)
-    surf = ax.plot_surface(X, Y, Z, cmap=cm.viridis, linewidth=0, antialiased=True)
+# Create animation and save GIF
+def create_wave_gif(sources, filename):
+    fig, ax = plt.subplots(figsize=(6, 5))
+    Z = total_wave(X, Y, sources, 0)
+    im = ax.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()],
+                   origin='lower', cmap='viridis', animated=True)
+    ax.set_title(f'Wave Interference from {len(sources)} Source(s)')
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    ax.set_zlabel('Amplitude')
-    ax.set_title('Wave from Single Source (3D Surface)')
-    plt.show()
-
-# Plot heatmap for multiple sources
-def plot_multiple_sources_heatmap(sources):
-    Z = total_wave(X, Y, sources, 0)
-    plt.figure(figsize=(8, 6))
-    plt.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()], origin='lower', cmap='viridis')
-    plt.colorbar(label='Amplitude')
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.title(f'Wave from {len(sources)} Sources (Heatmap)')
-    plt.show()
-
-# Animation function for heatmaps
-def animate_heatmap(sources):
-    fig, ax = plt.subplots(figsize=(8, 6))
+    plt.colorbar(im, ax=ax, label='Amplitude')
 
     def update(frame):
-        t = frame / 10.0  # Time progression
+        t = frame / 10.0
         Z = total_wave(X, Y, sources, t)
         im.set_array(Z)
-        return im,
+        return [im]
 
-    Z = total_wave(X, Y, sources, 0)
-    im = ax.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()], origin='lower', cmap='viridis')
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_title(f'Wave from {len(sources)} Sources (Heatmap)')
-    cbar = plt.colorbar(im, label='Amplitude')
-
-    ani = FuncAnimation(fig, update, frames=np.arange(0, 50), interval=50)
+    ani = FuncAnimation(fig, update, frames=50, interval=50, blit=True)
+    ani.save(filename, writer=PillowWriter(fps=10))
     plt.close()
-    return ani
 
-# Main execution
-if __name__ == "__main__":
-    # Single source: Heatmap and 3D plot
-    plot_single_source_heatmap()
-    plot_single_source_3d()
-
-    # Two sources: Heatmap and animation
-    sources_2 = [(-3, 0), (3, 0)]
-    plot_multiple_sources_heatmap(sources_2)
-    ani_2 = animate_heatmap(sources_2)
-    HTML(ani_2.to_html5_video())
-
-    # Three sources (triangle): Heatmap and animation
-    sources_3 = [
-        (-3, 0),
-        (3, 0),
-        (0, 3 * np.sqrt(3))
-    ]
-    plot_multiple_sources_heatmap(sources_3)
-    ani_3 = animate_heatmap(sources_3)
-    HTML(ani_3.to_html5_video())
-
-    # Four sources (square): Heatmap and animation
-    sources_4 = [
-        (-3, -3),
-        (3, -3),
-        (3, 3),
-        (-3, 3)
-    ]
-    plot_multiple_sources_heatmap(sources_4)
-    ani_4 = animate_heatmap(sources_4)
-    HTML(ani_4.to_html5_video())
+# Generate, display, and download animations
+for n in [1, 2, 3, 4, 5, 15]:  # ← You can change this to range(1, 31) for full set
+    sources = generate_polygon_sources(n)
+    gif_filename = f"wave_{n}_sources.gif"
+    create_wave_gif(sources, gif_filename)
+    display(Image(filename=gif_filename))
+    files.download(gif_filename)
 ```
 
 ## Colab
