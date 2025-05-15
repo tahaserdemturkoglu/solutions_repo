@@ -245,7 +245,7 @@ This consistency across different planets indicates that the square of the orbit
 
 ### Kepler's Third Law
 
-![alt text](image.png)
+![alt text](image-5.png)
 
 ```python
 # Import necessary libraries
@@ -261,9 +261,17 @@ orbital_periods = [0.241, 0.615, 1.000, 1.881, 11.862, 29.457, 84.011, 164.791] 
 log_r_cubed = np.log10(np.array(semi_major_axes)**3)
 log_T_squared = np.log10(np.array(orbital_periods)**2)
 
+# Perform linear regression to get the best-fit line
+coeffs = np.polyfit(log_r_cubed, log_T_squared, 1)
+slope, intercept = coeffs
+best_fit_line = slope * log_r_cubed + intercept
+
 # Create the scatter plot
 plt.figure(figsize=(10, 6))
-plt.scatter(log_r_cubed, log_T_squared, color='blue', label='$T^2 \propto r^3$')
+plt.scatter(log_r_cubed, log_T_squared, color='blue', label='Planet Data')
+
+# Plot the best-fit line (Kepler's Law line)
+plt.plot(log_r_cubed, best_fit_line, color='red', linestyle='--', label=f'Best Fit: $y = {slope:.2f}x + {intercept:.2f}$')
 
 # Annotate each data point with the planet name
 for i, planet in enumerate(planets):
@@ -271,8 +279,8 @@ for i, planet in enumerate(planets):
 
 # Customize the plot
 plt.title("Kepler's Third Law: $T^2$ vs. $r^3$ (Log Scale)")
-plt.xlabel('$\log_{10}(r^3)$ ($m^3$)')
-plt.ylabel('$\log_{10}(T^2)$ ($s^2$)')
+plt.xlabel('$\log_{10}(r^3)$ (AU$^3$)')
+plt.ylabel('$\log_{10}(T^2)$ (yr$^2$)')
 plt.grid(True, which="both", ls="--", alpha=0.6)
 plt.legend()
 plt.tight_layout()
