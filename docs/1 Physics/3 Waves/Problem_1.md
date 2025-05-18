@@ -281,6 +281,7 @@ which depend on the geometric layout of source positions $\{(x_i, y_i)\}$.
 ![alt text](<indir (2)-1.gif>)
 ![alt text](<indir (3)-1.gif>)
 ![alt text](<indir (4)-1.gif>)
+![alt text](<indir (5)-1.gif>)
 
 
 ```python
