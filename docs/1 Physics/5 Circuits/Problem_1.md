@@ -78,13 +78,6 @@ Given the problem scope, choose one of the following options:
   
 - **Option 2:** Provide a full implementation including input parsing, graph construction, and testing with sample circuit graphs.
 
----
-
-*Note: In Markdown, mathematical expressions inline are enclosed with single dollar signs like* $R = \frac{V}{I}$, *while emphasized displayed equations use double dollar signs:*
-
-$$
-I = \frac{V}{R}
-$$
 
 ---
 
