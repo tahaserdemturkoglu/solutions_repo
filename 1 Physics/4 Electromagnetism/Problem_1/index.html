@@ -172,6 +172,326 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="sector-1-conceptual-and-contextual-groundwork">Sector 1: Conceptual and Contextual Groundwork</h1>
+<p>The Lorentz force is a fundamental principle in classical electrodynamics that governs the motion of charged particles under the influence of electric and magnetic fields. It is expressed as:</p>
+<div class="arithmatex">\[
+\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
+\]</div>
+<p>where:
+- <span class="arithmatex">\(q\)</span> is the electric charge of the particle,
+- <span class="arithmatex">\(\mathbf{E}\)</span> is the electric field vector,
+- <span class="arithmatex">\(\mathbf{B}\)</span> is the magnetic field vector,
+- <span class="arithmatex">\(\mathbf{v}\)</span> is the velocity vector of the particle.</p>
+<p>This force law is central to the operation of several modern technologies and natural phenomena.</p>
+<hr/>
+<h2 id="real-world-systems-influenced-by-the-lorentz-force">Real-World Systems Influenced by the Lorentz Force</h2>
+<h3 id="1-particle-accelerators">1. Particle Accelerators</h3>
+<p>In particle accelerators such as cyclotrons and synchrotrons, electric fields are used to <strong>accelerate</strong> particles, while magnetic fields <strong>guide</strong> their paths.</p>
+<ul>
+<li>
+<p>The <strong>electric field</strong> provides work on the particle:
+  $$
+  W = q\mathbf{E} \cdot \mathbf{d}
+  $$
+  which increases the kinetic energy:
+  $$
+  \Delta K = qE\Delta x \quad \text{(for uniform } \mathbf{E} \text{ along } x)
+  $$</p>
+</li>
+<li>
+<p>The <strong>magnetic field</strong> bends the particle’s trajectory due to the <span class="arithmatex">\(\mathbf{v} \times \mathbf{B}\)</span> term:
+  $$
+  \mathbf{F}_\text{mag} = q\mathbf{v} \times \mathbf{B}
+  $$</p>
+</li>
+<li>
+<p>If <span class="arithmatex">\(\mathbf{v} \perp \mathbf{B}\)</span>, the particle follows a circular path with <strong>radius of curvature</strong>:
+  $$
+  r = \frac{mv}{|q|B}
+  $$</p>
+</li>
+<li>
+<p>The <strong>cyclotron frequency</strong>, or Larmor frequency, is given by:
+  $$
+  \omega_c = \frac{|q|B}{m}
+  $$</p>
+</li>
+</ul>
+<h3 id="2-mass-spectrometers">2. Mass Spectrometers</h3>
+<p>Mass spectrometers exploit the Lorentz force to <strong>separate ions based on mass-to-charge ratio</strong> <span class="arithmatex">\((m/q)\)</span>.</p>
+<ul>
+<li>
+<p>After acceleration by an electric field to a velocity <span class="arithmatex">\(v\)</span>, the ion enters a magnetic field:
+  $$
+  qE = \frac{1}{2}mv^2 \Rightarrow v = \sqrt{\frac{2qV}{m}}
+  $$</p>
+</li>
+<li>
+<p>The radius of curvature in the magnetic field allows mass determination:
+  $$
+  r = \frac{mv}{qB}
+  \quad \Rightarrow \quad
+  \frac{m}{q} = \frac{rB}{v}
+  $$</p>
+</li>
+</ul>
+<h3 id="3-plasma-confinement-devices">3. Plasma Confinement Devices</h3>
+<p>Devices such as <strong>tokamaks</strong> and <strong>stellarators</strong> use magnetic fields to confine high-temperature plasmas.</p>
+<ul>
+<li>
+<p>Charged particles spiral around magnetic field lines:
+  $$
+  \text{Helical motion: } \mathbf{v} = v_\parallel \hat{b} + v_\perp
+  $$</p>
+</li>
+<li>
+<p>The <strong>magnetic mirror effect</strong> occurs when field strength varies along the path:
+  $$
+  \mu = \frac{mv_\perp^2}{2B} \quad \text{(magnetic moment conserved)}
+  $$</p>
+</li>
+</ul>
+<h3 id="4-astrophysical-environments">4. Astrophysical Environments</h3>
+<p>Charged particles in space, such as cosmic rays and solar wind ions, are deflected and guided by galactic and planetary magnetic fields.</p>
+<ul>
+<li>
+<p>The <strong>Earth’s magnetosphere</strong> traps particles in radiation belts, e.g., Van Allen belts.</p>
+</li>
+<li>
+<p><strong>Drift motion</strong> arises due to inhomogeneities in <span class="arithmatex">\(\mathbf{B}\)</span>:
+  $$
+  \mathbf{v}<em>\text{drift} = \frac{1}{qB^2} (\mathbf{F}</em>\text{ext} \times \mathbf{B})
+  $$</p>
+</li>
+</ul>
+<hr/>
+<h2 id="physical-roles-of-electric-and-magnetic-fields">Physical Roles of Electric and Magnetic Fields</h2>
+<h3 id="electric-fields-acceleration-and-steering">Electric Fields: Acceleration and Steering</h3>
+<p>An electric field performs work on a charged particle:</p>
+<div class="arithmatex">\[
+\mathbf{F}_\text{elec} = q\mathbf{E}
+\]</div>
+<p>This force causes <strong>linear acceleration</strong> in the direction of the field for positive charges, and opposite for negative ones.</p>
+<ul>
+<li>
+<p>Work-energy relation:
+  $$
+  W = \Delta K = qEd
+  $$</p>
+</li>
+<li>
+<p>In time-dependent fields, particles can be oscillated or focused using <strong>RF cavities</strong>.</p>
+</li>
+</ul>
+<h3 id="magnetic-fields-guidance-and-curvature">Magnetic Fields: Guidance and Curvature</h3>
+<p>Magnetic fields do <strong>no work</strong> on charged particles since:</p>
+<div class="arithmatex">\[
+\mathbf{F}_\text{mag} \cdot \mathbf{v} = q (\mathbf{v} \times \mathbf{B}) \cdot \mathbf{v} = 0
+\]</div>
+<p>Instead, they alter the <strong>direction</strong> of motion, producing:</p>
+<ul>
+<li><strong>Circular</strong> or <strong>helical</strong> orbits depending on velocity component parallel to <span class="arithmatex">\(\mathbf{B}\)</span>.</li>
+<li>
+<p><strong>Gyromotion</strong> with characteristic radius and frequency:
+  $$
+  r_L = \frac{mv_\perp}{|q|B}, \quad \omega_L = \frac{|q|B}{m}
+  $$</p>
+</li>
+<li>
+<p><strong>Magnetic confinement</strong> by forcing charged particles to remain near field lines.</p>
+</li>
+</ul>
+<hr/>
+<p>These foundational concepts are critical before undertaking numerical simulations of the Lorentz force, as they inform expected behaviors and aid in validating results.</p>
+<h1 id="sector-2-mathematical-and-physical-modeling">Sector 2: Mathematical and Physical Modeling</h1>
+<p>In order to simulate the motion of charged particles under electromagnetic influence, we must begin by rigorously formulating the equation of motion derived from classical electrodynamics.</p>
+<hr/>
+<h2 id="equation-of-motion">Equation of Motion</h2>
+<p>The total force <span class="arithmatex">\(\mathbf{F}\)</span> acting on a charged particle in the presence of electric and magnetic fields is given by the <strong>Lorentz force law</strong>:</p>
+<div class="arithmatex">\[
+\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
+\]</div>
+<p>According to Newton's second law, this force is also equal to the time derivative of momentum:</p>
+<div class="arithmatex">\[
+\mathbf{F} = m\frac{d\mathbf{v}}{dt}
+\]</div>
+<p>Combining these, we obtain the fundamental equation of motion:</p>
+<div class="arithmatex">\[
+m\frac{d\mathbf{v}}{dt} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
+\]</div>
+<p>For numerical integration, this can be rewritten as a first-order system:</p>
+<div class="arithmatex">\[
+\frac{d\mathbf{r}}{dt} = \mathbf{v}, \quad
+\frac{d\mathbf{v}}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+\]</div>
+<hr/>
+<h2 id="numerical-methods-for-integration">Numerical Methods for Integration</h2>
+<p>As these differential equations are generally nonlinear and lack closed-form solutions for arbitrary field configurations, we must resort to <strong>numerical integration techniques</strong>. Two widely used methods are:</p>
+<h3 id="1-euler-method">1. Euler Method</h3>
+<p>The Euler method provides a first-order approximation:</p>
+<ul>
+<li>
+<p>Velocity update:
+  $$
+  \mathbf{v}_{n+1} = \mathbf{v}_n + \Delta t \cdot \frac{q}{m}(\mathbf{E}_n + \mathbf{v}_n \times \mathbf{B}_n)
+  $$</p>
+</li>
+<li>
+<p>Position update:
+  $$
+  \mathbf{r}_{n+1} = \mathbf{r}_n + \Delta t \cdot \mathbf{v}_n
+  $$</p>
+</li>
+</ul>
+<p>While simple and fast, it is only conditionally stable and prone to significant numerical error in the presence of strong magnetic fields.</p>
+<h3 id="2-runge-kutta-method-4th-order">2. Runge-Kutta Method (4th Order)</h3>
+<p>A more accurate approach is the classical fourth-order Runge-Kutta (RK4) method. For a general system <span class="arithmatex">\(\dot{\mathbf{y}} = \mathbf{f}(t, \mathbf{y})\)</span>, it proceeds as:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathbf{k}_1 &amp;= \mathbf{f}(t_n, \mathbf{y}_n) \\
+\mathbf{k}_2 &amp;= \mathbf{f}\left(t_n + \frac{\Delta t}{2}, \mathbf{y}_n + \frac{\Delta t}{2}\mathbf{k}_1\right) \\
+\mathbf{k}_3 &amp;= \mathbf{f}\left(t_n + \frac{\Delta t}{2}, \mathbf{y}_n + \frac{\Delta t}{2}\mathbf{k}_2\right) \\
+\mathbf{k}_4 &amp;= \mathbf{f}(t_n + \Delta t, \mathbf{y}_n + \Delta t\mathbf{k}_3) \\
+\mathbf{y}_{n+1} &amp;= \mathbf{y}_n + \frac{\Delta t}{6}(\mathbf{k}_1 + 2\mathbf{k}_2 + 2\mathbf{k}_3 + \mathbf{k}_4)
+\end{aligned}
+\]</div>
+<p>Applied to our velocity and position system, RK4 ensures <strong>higher stability and accuracy</strong>, especially when dealing with helical or oscillatory motion induced by <span class="arithmatex">\(\mathbf{B}\)</span> fields.</p>
+<hr/>
+<h2 id="simulation-parameters">Simulation Parameters</h2>
+<p>To fully specify the problem, the following physical parameters must be defined prior to integration:</p>
+<h3 id="1-charge-q">1. Charge (<span class="arithmatex">\(q\)</span>)</h3>
+<p>Determines the sign and magnitude of the Lorentz force. Common values include:
+- Electron: <span class="arithmatex">\(q = -1.6 \times 10^{-19}\)</span> C<br/>
+- Proton: <span class="arithmatex">\(q = +1.6 \times 10^{-19}\)</span> C  </p>
+<h3 id="2-mass-m">2. Mass (<span class="arithmatex">\(m\)</span>)</h3>
+<p>Inertia of the particle. Influences acceleration under applied force:
+- Electron: <span class="arithmatex">\(m = 9.11 \times 10^{-31}\)</span> kg<br/>
+- Proton: <span class="arithmatex">\(m = 1.67 \times 10^{-27}\)</span> kg  </p>
+<h3 id="3-initial-velocity-mathbfv_0">3. Initial Velocity (<span class="arithmatex">\(\mathbf{v}_0\)</span>)</h3>
+<p>Vector defining the particle's initial state of motion. Components relative to the field directions (<span class="arithmatex">\(v_\parallel\)</span>, <span class="arithmatex">\(v_\perp\)</span>) determine motion type:
+- Circular (<span class="arithmatex">\(\mathbf{v} \perp \mathbf{B}\)</span>)<br/>
+- Helical (general 3D case)</p>
+<h3 id="4-electric-field-mathbfe">4. Electric Field (<span class="arithmatex">\(\mathbf{E}\)</span>)</h3>
+<p>Applied field that contributes to linear acceleration:
+$$
+\mathbf{F}_\text{electric} = q\mathbf{E}
+$$</p>
+<p>Can be uniform, non-uniform, static, or time-varying.</p>
+<h3 id="5-magnetic-field-mathbfb">5. Magnetic Field (<span class="arithmatex">\(\mathbf{B}\)</span>)</h3>
+<p>Field responsible for transverse force:
+$$
+\mathbf{F}_\text{magnetic} = q\mathbf{v} \times \mathbf{B}
+$$</p>
+<p>Primarily affects trajectory curvature and confinement.</p>
+<hr/>
+<p>Together, these equations and parameters form the <strong>foundation for simulating</strong> the motion of charged particles under electromagnetic fields, enabling us to build increasingly realistic and physically accurate models.</p>
+<h1 id="electromagnetism-lorentz-force-simulation">Electromagnetism: Lorentz Force Simulation</h1>
+<p>We simulate the motion of a charged particle subject to electric and magnetic fields using the Lorentz Force law.</p>
+<h2 id="lorentz-force-law">Lorentz Force Law</h2>
+<div class="arithmatex">\[
+\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
+\]</div>
+<p>Using Newton's second law:</p>
+<div class="arithmatex">\[
+m \frac{d\mathbf{v}}{dt} = q (\mathbf{E} + \mathbf{v} \times \mathbf{B})
+\]</div>
+<p>We also track:</p>
+<div class="arithmatex">\[
+\frac{d\mathbf{r}}{dt} = \mathbf{v}
+\]</div>
+<p>We'll numerically integrate this system using the Euler method.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><span class="arithmatex">\(q = 1 \, \text{C}\)</span></li>
+<li><span class="arithmatex">\(m = 0.001 \, \text{kg}\)</span></li>
+<li>Time step <span class="arithmatex">\(\Delta t = 0.001 \, \text{s}\)</span></li>
+<li>Number of steps: <span class="arithmatex">\(N = 10000\)</span></li>
+</ul>
+<h2 id="code-and-plots">Code and Plots</h2>
+<h2 id="_1"><img alt="alt text" src="../image.png"/></h2>
+<h2 id="_2"><img alt="alt text" src="../image-1.png"/></h2>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# === Sector 1: Common Functions ===
+
+def lorentz_force(q, m, E, B, v):
+    """Compute the Lorentz force per unit mass."""
+    return (q / m) * (E + np.cross(v, B))
+
+def simulate_motion(q, m, E, B, v_init, r_init, dt, num_steps):
+    """Simulate particle trajectory under Lorentz force using Euler method."""
+    v = np.array(v_init, dtype=float)
+    r = np.array(r_init, dtype=float)
+    trajectory = [r.copy()]
+
+    for _ in range(num_steps):
+        a = lorentz_force(q, m, E, B, v)
+        v += a * dt
+        r += v * dt
+        trajectory.append(r.copy())
+
+    return np.array(trajectory)
+
+def plot_trajectory(trajectory, title='3D Trajectory'):
+    """Plot 3D trajectory of the particle."""
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2])
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.set_title(title)
+    ax.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+# === Sector 2: Simulation Parameters ===
+q, m = 1.0, 1.0     # Charge and mass
+dt = 0.01           # Time step
+steps = 1000        # Number of integration steps
+
+
+# === Sector 3: Case A - Helical Motion ===
+print("Running Case A: Helical Motion (Uniform Magnetic Field Only)")
+
+B_A = np.array([0, 0, 1])
+E_A = np.zeros(3)
+v0_A = [1, 0, 1]
+r0_A = [0, 0, 0]
+
+trajectory_A = simulate_motion(q, m, E_A, B_A, v0_A, r0_A, dt, steps)
+plot_trajectory(trajectory_A, title='Case A: Helical Motion in Uniform B Field')
+
+
+# === Sector 4: Case B - Aligned E and B ===
+print("Running Case B: Aligned Electric and Magnetic Fields")
+
+B_B = np.array([0, 0, 1])
+E_B = np.array([0, 0, 1])
+v0_B = [1, 0, 0]
+r0_B = [0, 0, 0]
+
+trajectory_B = simulate_motion(q, m, E_B, B_B, v0_B, r0_B, dt, steps)
+plot_trajectory(trajectory_B, title='Case B: Aligned E and B Fields')
+
+
+# === Sector 5: Case C - Crossed E × B Fields ===
+print("Running Case C: Crossed Electric and Magnetic Fields (E × B Drift)")
+
+B_C = np.array([0, 0, 1])
+E_C = np.array([1, 0, 0])
+v0_C = [0, 0, 0]
+r0_C = [0, 0, 0]
+
+trajectory_C = simulate_motion(q, m, E_C, B_C, v0_C, r0_C, dt, steps)
+plot_trajectory(trajectory_C, title='Case C: Crossed E and B Fields (E × B Drift)')
+</code></pre>
+<p><a href="https://colab.research.google.com/drive/1I7k1RVdSVBdTG8CCLN-LS481sLJE_pNQ">Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
