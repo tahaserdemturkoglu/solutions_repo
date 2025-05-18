@@ -172,6 +172,331 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="data-generation-in-statistical-analysis">Data Generation in Statistical Analysis</h1>
+<p>Data generation is a foundational step in statistical modeling and simulation. Selecting appropriate population distribution types and generating large datasets representative of those populations is crucial for valid inference.</p>
+<h2 id="population-distributions">Population Distributions</h2>
+<p>Consider three common types of population distributions:</p>
+<h3 id="1-uniform-distribution">1. Uniform Distribution</h3>
+<p>A continuous uniform distribution on the interval <span class="arithmatex">\([a, b]\)</span> has the probability density function (PDF):</p>
+<div class="arithmatex">\[
+f_X(x) = \frac{1}{b - a}, \quad a \leq x \leq b
+\]</div>
+<p>The cumulative distribution function (CDF) is:</p>
+<div class="arithmatex">\[
+F_X(x) = \frac{x - a}{b - a}, \quad a \leq x \leq b
+\]</div>
+<p>To generate a dataset <span class="arithmatex">\(\{X_i\}_{i=1}^n\)</span> from a uniform distribution, sample <span class="arithmatex">\(n\)</span> independent observations where</p>
+<div class="arithmatex">\[
+X_i \sim \text{Uniform}(a, b), \quad i = 1, 2, \ldots, n
+\]</div>
+<hr/>
+<h3 id="2-exponential-distribution">2. Exponential Distribution</h3>
+<p>The exponential distribution is often used to model waiting times and has PDF:</p>
+<div class="arithmatex">\[
+f_X(x) = \lambda e^{-\lambda x}, \quad x \geq 0, \lambda &gt; 0
+\]</div>
+<p>where <span class="arithmatex">\(\lambda\)</span> is the rate parameter. The CDF is:</p>
+<div class="arithmatex">\[
+F_X(x) = 1 - e^{-\lambda x}, \quad x \geq 0
+\]</div>
+<p>Generate <span class="arithmatex">\(n\)</span> samples from</p>
+<div class="arithmatex">\[
+X_i \sim \text{Exponential}(\lambda), \quad i = 1, 2, \ldots, n
+\]</div>
+<hr/>
+<h3 id="3-binomial-distribution">3. Binomial Distribution</h3>
+<p>The binomial distribution models the number of successes in <span class="arithmatex">\(n\)</span> independent Bernoulli trials, each with success probability <span class="arithmatex">\(p\)</span>.</p>
+<p>The probability mass function (PMF) is:</p>
+<div class="arithmatex">\[
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k = 0, 1, \ldots, n
+\]</div>
+<p>To generate data,</p>
+<div class="arithmatex">\[
+X_i \sim \text{Binomial}(n, p), \quad i = 1, 2, \ldots, m
+\]</div>
+<p>where <span class="arithmatex">\(m\)</span> is the number of generated observations.</p>
+<hr/>
+<h2 id="generating-large-datasets">Generating Large Datasets</h2>
+<p>Given a selected population distribution, generate a large dataset to approximate the population:</p>
+<ol>
+<li>Fix distribution parameters (e.g., <span class="arithmatex">\(a,b\)</span> for uniform, <span class="arithmatex">\(\lambda\)</span> for exponential, <span class="arithmatex">\(n,p\)</span> for binomial).</li>
+<li>Select a sample size <span class="arithmatex">\(N\)</span> sufficiently large to represent the population well.</li>
+<li>Use random number generation methods to simulate:</li>
+</ol>
+<div class="arithmatex">\[
+\{X_i\}_{i=1}^N \sim \text{Distribution}(\text{parameters})
+\]</div>
+<p>This process provides a simulated population for analysis.</p>
+<hr/>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Distribution</th>
+<th>Parameters</th>
+<th>Support</th>
+<th>PDF / PMF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uniform</td>
+<td><span class="arithmatex">\(a, b\)</span></td>
+<td><span class="arithmatex">\([a,b]\)</span></td>
+<td><span class="arithmatex">\(f_X(x) = \frac{1}{b - a}\)</span></td>
+</tr>
+<tr>
+<td>Exponential</td>
+<td><span class="arithmatex">\(\lambda &gt; 0\)</span></td>
+<td><span class="arithmatex">\([0, \infty)\)</span></td>
+<td><span class="arithmatex">\(f_X(x) = \lambda e^{-\lambda x}\)</span></td>
+</tr>
+<tr>
+<td>Binomial</td>
+<td><span class="arithmatex">\(n \in \mathbb{N}\)</span>, <span class="arithmatex">\(p \in [0,1]\)</span></td>
+<td><span class="arithmatex">\(\{0,\ldots,n\}\)</span></td>
+<td><span class="arithmatex">\(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="example-generating-data">Example: Generating Data</h2>
+<p>Suppose we want to generate <span class="arithmatex">\(N=10,000\)</span> samples from a uniform distribution on <span class="arithmatex">\([0,1]\)</span>:</p>
+<div class="arithmatex">\[
+X_i \sim \text{Uniform}(0,1), \quad i=1,\ldots, 10000
+\]</div>
+<p>Similarly, for exponential with <span class="arithmatex">\(\lambda=2\)</span>:</p>
+<div class="arithmatex">\[
+X_i \sim \text{Exponential}(2), \quad i=1,\ldots, 10000
+\]</div>
+<p>And binomial with <span class="arithmatex">\(n=10\)</span>, <span class="arithmatex">\(p=0.5\)</span>:</p>
+<div class="arithmatex">\[
+X_i \sim \text{Binomial}(10, 0.5), \quad i=1,\ldots, 10000
+\]</div>
+<hr/>
+<p>This framework allows for robust simulation of population data across multiple distribution types, fundamental for subsequent statistical analysis and inference.</p>
+<hr/>
+<h1 id="sampling-process-and-sampling-distribution-of-the-sample-mean">Sampling Process and Sampling Distribution of the Sample Mean</h1>
+<p>Sampling from a population distribution is the core of inferential statistics. This process involves drawing samples of various sizes, calculating sample statistics, and understanding their behavior through repeated sampling.</p>
+<hr/>
+<h2 id="1-sampling-from-population-distributions">1. Sampling from Population Distributions</h2>
+<p>Given a population distribution with random variable <span class="arithmatex">\(X\)</span>, we draw samples of size <span class="arithmatex">\(n\)</span>:</p>
+<div class="arithmatex">\[
+\{X_1, X_2, \ldots, X_n\} \quad \text{i.i.d.} \sim F_X
+\]</div>
+<p>where <span class="arithmatex">\(F_X\)</span> denotes the population distribution (e.g., Uniform, Exponential, Binomial).</p>
+<p>Typical sample sizes considered are:</p>
+<div class="arithmatex">\[
+n \in \{5, 10, 30, 50\}
+\]</div>
+<hr/>
+<h2 id="2-sample-mean">2. Sample Mean</h2>
+<p>For each sample of size <span class="arithmatex">\(n\)</span>, the sample mean <span class="arithmatex">\(\bar{X}_n\)</span> is calculated as:</p>
+<div class="arithmatex">\[
+\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i
+\]</div>
+<p>The sample mean <span class="arithmatex">\(\bar{X}_n\)</span> is a random variable itself because it depends on the randomly drawn sample.</p>
+<hr/>
+<h2 id="3-repeated-sampling-and-sampling-distribution">3. Repeated Sampling and Sampling Distribution</h2>
+<p>To understand the variability and distribution of the sample mean, repeat the sampling process <span class="arithmatex">\(M\)</span> times:</p>
+<div class="arithmatex">\[
+\bar{X}_n^{(1)}, \bar{X}_n^{(2)}, \ldots, \bar{X}_n^{(M)}
+\]</div>
+<p>where each <span class="arithmatex">\(\bar{X}_n^{(j)}\)</span> is the mean of the <span class="arithmatex">\(j\)</span>th sample of size <span class="arithmatex">\(n\)</span>.</p>
+<p>This collection forms the <strong>sampling distribution of the sample mean</strong> for sample size <span class="arithmatex">\(n\)</span>.</p>
+<hr/>
+<h2 id="4-properties-of-the-sampling-distribution">4. Properties of the Sampling Distribution</h2>
+<p>By the <strong>Law of Large Numbers</strong> and <strong>Central Limit Theorem (CLT)</strong>, for sufficiently large <span class="arithmatex">\(n\)</span>:</p>
+<ul>
+<li>The expected value of the sample mean equals the population mean <span class="arithmatex">\(\mu\)</span>:</li>
+</ul>
+<div class="arithmatex">\[
+\mathbb{E}[\bar{X}_n] = \mu
+\]</div>
+<ul>
+<li>The variance of the sample mean is:</li>
+</ul>
+<div class="arithmatex">\[
+\mathrm{Var}(\bar{X}_n) = \frac{\sigma^2}{n}
+\]</div>
+<p>where <span class="arithmatex">\(\sigma^2\)</span> is the variance of the population.</p>
+<ul>
+<li>As <span class="arithmatex">\(n \to \infty\)</span>, the distribution of <span class="arithmatex">\(\bar{X}_n\)</span> approaches a normal distribution:</li>
+</ul>
+<div class="arithmatex">\[
+\bar{X}_n \xrightarrow{d} \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)
+\]</div>
+<hr/>
+<h2 id="5-practical-steps-in-the-sampling-process">5. Practical Steps in the Sampling Process</h2>
+<ol>
+<li><strong>Randomly sample</strong> <span class="arithmatex">\(n\)</span> observations from the population <span class="arithmatex">\(X\)</span>.</li>
+<li><strong>Calculate the sample mean</strong> <span class="arithmatex">\(\bar{X}_n\)</span>.</li>
+<li><strong>Repeat</strong> steps 1 and 2, <span class="arithmatex">\(M\)</span> times (e.g., <span class="arithmatex">\(M = 1000\)</span>).</li>
+<li><strong>Construct</strong> the sampling distribution of <span class="arithmatex">\(\bar{X}_n\)</span> by collecting all sample means.</li>
+</ol>
+<p>This process allows us to empirically estimate the shape, mean, and variance of the sampling distribution.</p>
+<hr/>
+<h2 id="6-summary-of-notation">6. Summary of Notation</h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X_i\)</span></td>
+<td><span class="arithmatex">\(i\)</span>th observation from the population</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n\)</span></td>
+<td>Sample size</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\bar{X}_n\)</span></td>
+<td>Sample mean for sample size <span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(M\)</span></td>
+<td>Number of repeated samples (resamples)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mu\)</span></td>
+<td>Population mean</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sigma^2\)</span></td>
+<td>Population variance</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="example-sampling-from-a-uniform-population">Example: Sampling from a Uniform Population</h2>
+<p>Assume</p>
+<div class="arithmatex">\[
+X \sim \text{Uniform}(0,1)
+\]</div>
+<p>For <span class="arithmatex">\(n=5\)</span>:</p>
+<ul>
+<li>Draw <span class="arithmatex">\(M=1000\)</span> samples <span class="arithmatex">\(\{X_1^{(j)}, \ldots, X_5^{(j)}\}\)</span>, <span class="arithmatex">\(j=1,\ldots,1000\)</span>.</li>
+<li>Compute</li>
+</ul>
+<div class="arithmatex">\[
+\bar{X}_5^{(j)} = \frac{1}{5} \sum_{i=1}^5 X_i^{(j)}
+\]</div>
+<ul>
+<li>The empirical distribution of <span class="arithmatex">\(\{\bar{X}_5^{(j)}\}_{j=1}^{1000}\)</span> approximates the sampling distribution of <span class="arithmatex">\(\bar{X}_5\)</span>.</li>
+</ul>
+<p>Repeat the procedure for other sample sizes <span class="arithmatex">\(n = 10, 30, 50\)</span> to observe the effect of increasing sample size on the sampling distribution.</p>
+<hr/>
+<h2 id="this-framework-sets-the-foundation-for-understanding-estimator-behavior-and-forms-the-basis-of-hypothesis-testing-and-confidence-interval-construction-in-statistics">This framework sets the foundation for understanding estimator behavior and forms the basis of hypothesis testing and confidence interval construction in statistics.</h2>
+<h1 id="practical-reflection-on-the-central-limit-theorem-clt">Practical Reflection on the Central Limit Theorem (CLT)</h1>
+<p>The Central Limit Theorem (CLT) is a cornerstone of statistical inference, underpinning many real-world applications across diverse fields by justifying the approximation of sampling distributions as normal, regardless of the population distribution.</p>
+<hr/>
+<h2 id="1-real-world-applications-of-the-clt">1. Real-World Applications of the CLT</h2>
+<h3 id="a-estimating-population-parameters">(a) Estimating Population Parameters</h3>
+<p>The CLT allows practitioners to use sample means <span class="arithmatex">\(\bar{X}_n\)</span> to estimate population means <span class="arithmatex">\(\mu\)</span> with quantifiable uncertainty. Given a sufficiently large sample size <span class="arithmatex">\(n\)</span>, the sampling distribution of <span class="arithmatex">\(\bar{X}_n\)</span> is approximately normal:</p>
+<div class="arithmatex">\[
+\bar{X}_n \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)
+\]</div>
+<p>This enables construction of confidence intervals and hypothesis tests for <span class="arithmatex">\(\mu\)</span>, even when the population distribution is unknown or non-normal.</p>
+<hr/>
+<h3 id="b-quality-control-in-manufacturing">(b) Quality Control in Manufacturing</h3>
+<p>In manufacturing processes, quality metrics (e.g., dimensions, weights) are monitored via sample means from production batches. The CLT justifies the use of control charts based on <span class="arithmatex">\(\bar{X}_n\)</span> to detect shifts in the process mean.</p>
+<p>The normality assumption allows setting control limits at:</p>
+<div class="arithmatex">\[
+\mu \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}
+\]</div>
+<p>where <span class="arithmatex">\(z_{\alpha/2}\)</span> is the critical value from the standard normal distribution. This helps identify defective batches and maintain product standards.</p>
+<hr/>
+<h3 id="c-predicting-outcomes-in-financial-models">(c) Predicting Outcomes in Financial Models</h3>
+<p>Financial analysts rely on the CLT to model aggregate returns or portfolio averages. Even if individual asset returns are not normal, the average return of a large portfolio tends toward normality:</p>
+<div class="arithmatex">\[
+\bar{R}_n = \frac{1}{n} \sum_{i=1}^n R_i \approx \mathcal{N}\left(\mu_R, \frac{\sigma_R^2}{n}\right)
+\]</div>
+<p>This underpins risk management, option pricing, and value-at-risk calculations.</p>
+<hr/>
+<h2 id="2-how-simulation-supports-these-applications">2. How Simulation Supports These Applications</h2>
+<p>Through simulation, the theoretical properties of the CLT can be observed empirically:</p>
+<ul>
+<li>
+<p>By generating repeated samples from various populations (e.g., skewed, discrete), and calculating sample means <span class="arithmatex">\(\bar{X}_n\)</span>, one observes that the distribution of <span class="arithmatex">\(\bar{X}_n\)</span> increasingly resembles a normal distribution as <span class="arithmatex">\(n\)</span> grows.</p>
+</li>
+<li>
+<p>Simulations validate that variance of the sample mean decreases as <span class="arithmatex">\(1/n\)</span>, confirming improved estimator precision.</p>
+</li>
+<li>
+<p>They demonstrate robustness of CLT applications, even when underlying assumptions are mildly violated.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="3-summary">3. Summary</h2>
+<p>The CLT provides a powerful theoretical foundation enabling:</p>
+<ul>
+<li><strong>Reliable parameter estimation</strong> from sample statistics.</li>
+<li><strong>Quality assurance</strong> through monitoring sample means.</li>
+<li><strong>Financial risk modeling</strong> using aggregate return distributions.</li>
+</ul>
+<p>Simulations act as practical tools to visualize and verify the CLT's guarantees, strengthening confidence in applying these statistical techniques to complex, real-world problems.</p>
+<hr/>
+<h2 id="code-and-plots">Code and Plots</h2>
+<p><img alt="alt text" src="../image.png"/></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import norm
+
+# Set seaborn style
+sns.set(style="whitegrid")
+
+# Parameters
+sample_sizes = [5, 10, 30, 50]
+num_repeats = 1000
+
+# Population parameters
+uniform_params = (0, 1)  # a=0, b=1
+exp_lambda = 1.0         # lambda for exponential
+binom_n, binom_p = 10, 0.5
+
+# Function to generate samples and calculate sample means
+def generate_sample_means(dist_name, sample_size, repeats):
+    means = []
+    for _ in range(repeats):
+        if dist_name == 'Uniform':
+            sample = np.random.uniform(uniform_params[0], uniform_params[1], sample_size)
+        elif dist_name == 'Exponential':
+            sample = np.random.exponential(1/exp_lambda, sample_size)
+        elif dist_name == 'Binomial':
+            sample = np.random.binomial(binom_n, binom_p, sample_size)
+        means.append(np.mean(sample))
+    return np.array(means)
+
+# Plot histograms
+fig, axes = plt.subplots(len(sample_sizes), 3, figsize=(15, 12), constrained_layout=True)
+dist_names = ['Uniform', 'Exponential', 'Binomial']
+
+for row_idx, n in enumerate(sample_sizes):
+    for col_idx, dist in enumerate(dist_names):
+        sample_means = generate_sample_means(dist, n, num_repeats)
+
+        ax = axes[row_idx, col_idx]
+        sns.histplot(sample_means, bins=30, kde=True, color='skyblue', ax=ax, stat="density")
+
+        # Overlay Normal distribution fit
+        mu, std = np.mean(sample_means), np.std(sample_means)
+        x = np.linspace(mu - 4*std, mu + 4*std, 200)
+        ax.plot(x, norm.pdf(x, mu, std), 'r--', lw=2, label='Normal fit')
+
+        ax.set_title(f'{dist} Sample Means\nn={n}, repeats={num_repeats}')
+        ax.set_xlabel('Sample Mean')
+        ax.set_ylabel('Density')
+        ax.legend()
+
+plt.suptitle('Sampling Distribution of the Sample Mean\nConvergence to Normal Distribution', fontsize=16, y=1.02)
+plt.show()
+</code></pre>
+<p><a href="https://colab.research.google.com/drive/1IlbApxDrJ5oyAD5PGrg6VayMA9T4qbTm">Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
