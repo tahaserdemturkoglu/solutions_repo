@@ -172,6 +172,309 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="sector-1-problem-understanding-and-setup">Sector 1: Problem Understanding and Setup</h1>
+<hr/>
+<h2 id="graph-representation">Graph Representation</h2>
+<p>To analyze the circuit as a graph, we define:</p>
+<ul>
+<li><strong>Nodes (<span class="arithmatex">\(V\)</span>)</strong> as the junction points of the circuit.</li>
+<li><strong>Edges (<span class="arithmatex">\(E\)</span>)</strong> as the resistors connecting nodes.</li>
+<li>Each edge <span class="arithmatex">\(e \in E\)</span> has an associated <strong>weight</strong> <span class="arithmatex">\(w(e)\)</span> representing the resistance value <span class="arithmatex">\(R\)</span> of the resistor.</li>
+</ul>
+<p>Thus, the circuit can be modeled as an undirected weighted graph:
+$$
+G = (V, E, w)
+$$
+where
+- <span class="arithmatex">\(V = \{v_1, v_2, \ldots, v_n\}\)</span>,
+- <span class="arithmatex">\(E = \{e_{ij} | v_i \text{ connected to } v_j\}\)</span>,
+- <span class="arithmatex">\(w : E \to \mathbb{R}^+\)</span> such that <span class="arithmatex">\(w(e_{ij}) = R_{ij} &gt; 0\)</span>.</p>
+<hr/>
+<h2 id="input-format-specification">Input Format Specification</h2>
+<p>The input graph can be represented in several ways, depending on the use case:</p>
+<ol>
+<li><strong>Adjacency List</strong>: For each node <span class="arithmatex">\(v_i\)</span>, list all adjacent nodes <span class="arithmatex">\(v_j\)</span> along with weights <span class="arithmatex">\(R_{ij}\)</span>.
+   $$
+   \text{AdjacencyList}(v_i) = { (v_j, R_{ij}) \mid (v_i, v_j) \in E }
+   $$</li>
+<li><strong>Edge List with Weights</strong>: A list of tuples <span class="arithmatex">\((v_i, v_j, R_{ij})\)</span>.
+   $$
+   E = { (v_i, v_j, R_{ij}) \mid i,j = 1, \ldots, n }
+   $$</li>
+<li><strong>Adjacency Matrix (<span class="arithmatex">\(\mathbf{A}\)</span>)</strong>: A matrix of size <span class="arithmatex">\(n \times n\)</span> where each element <span class="arithmatex">\(A_{ij}\)</span> corresponds to the resistance value <span class="arithmatex">\(R_{ij}\)</span> if nodes are connected, or zero otherwise:
+   $$
+   A_{ij} = \begin{cases}
+   R_{ij} &amp; \text{if } (v_i, v_j) \in E, \
+   0 &amp; \text{otherwise}.
+   \end{cases}
+   $$</li>
+</ol>
+<hr/>
+<h2 id="graph-properties">Graph Properties</h2>
+<p>We assume the following properties for the circuit graph:</p>
+<ul>
+<li>
+<p><strong>Undirected edges</strong>: The graph <span class="arithmatex">\(G\)</span> is undirected, so
+  $$
+  (v_i, v_j) \in E \implies (v_j, v_i) \in E,
+  $$
+  and resistance weights are symmetric:
+  $$
+  R_{ij} = R_{ji}.
+  $$</p>
+</li>
+<li>
+<p><strong>Positive resistance weights</strong>:
+  $$
+  R_{ij} &gt; 0, \quad \forall (v_i, v_j) \in E.
+  $$</p>
+</li>
+<li>
+<p><strong>Connected graph</strong>: There exists at least one path between every pair of nodes <span class="arithmatex">\(v_i\)</span> and <span class="arithmatex">\(v_j\)</span>, ensuring the graph is connected:
+  $$
+  \forall v_i, v_j \in V, \quad \exists \text{ path } P = (v_i, \ldots, v_j).
+  $$</p>
+</li>
+</ul>
+<hr/>
+<h2 id="task-scope-selection">Task Scope Selection</h2>
+<p>Given the problem scope, choose one of the following options:</p>
+<ul>
+<li>
+<p><strong>Option 1:</strong> Develop detailed pseudocode and describe the algorithmic approach for analyzing the circuit graph.</p>
+</li>
+<li>
+<p><strong>Option 2:</strong> Provide a full implementation including input parsing, graph construction, and testing with sample circuit graphs.</p>
+</li>
+</ul>
+<hr/>
+<p><em>Note: In Markdown, mathematical expressions inline are enclosed with single dollar signs like</em> <span class="arithmatex">\(R = \frac{V}{I}\)</span>, <em>while emphasized displayed equations use double dollar signs:</em></p>
+<div class="arithmatex">\[
+I = \frac{V}{R}
+\]</div>
+<hr/>
+<h1 id="sector-2-algorithm-design">Sector 2: Algorithm Design</h1>
+<hr/>
+<h2 id="design-series-detection">Design Series Detection</h2>
+<p>To identify <strong>series resistor chains</strong>, we look for nodes with <strong>degree 2</strong> (connected to exactly two edges):</p>
+<ul>
+<li>
+<p>Let <span class="arithmatex">\(v_k \in V\)</span> be a node such that
+  $$
+  \deg(v_k) = 2,
+  $$
+  where <span class="arithmatex">\(\deg(v_k)\)</span> is the degree of node <span class="arithmatex">\(v_k\)</span>.</p>
+</li>
+<li>
+<p>The two edges connected to <span class="arithmatex">\(v_k\)</span> are <span class="arithmatex">\(e_{ik} = (v_i, v_k)\)</span> and <span class="arithmatex">\(e_{kj} = (v_k, v_j)\)</span> with resistances <span class="arithmatex">\(R_{ik}\)</span> and <span class="arithmatex">\(R_{kj}\)</span> respectively.</p>
+</li>
+<li>
+<p>Since these resistors are in series, they can be <strong>reduced</strong> to a single equivalent resistor:
+  $$
+  R_{\text{series}} = R_{ik} + R_{kj}.
+  $$</p>
+</li>
+<li>
+<p>The series reduction replaces edges <span class="arithmatex">\((v_i, v_k)\)</span> and <span class="arithmatex">\((v_k, v_j)\)</span> by a single edge <span class="arithmatex">\((v_i, v_j)\)</span> with weight <span class="arithmatex">\(R_{\text{series}}\)</span>, and removes node <span class="arithmatex">\(v_k\)</span> from <span class="arithmatex">\(V\)</span>.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="design-parallel-detection">Design Parallel Detection</h2>
+<p>To detect <strong>parallel resistor connections</strong>, identify multiple edges connecting the same pair of nodes:</p>
+<ul>
+<li>
+<p>For nodes <span class="arithmatex">\(v_i, v_j \in V\)</span>, suppose there are <span class="arithmatex">\(m\)</span> parallel edges:
+  $$
+  {e_{ij}^1, e_{ij}^2, \ldots, e_{ij}^m},
+  $$
+  with resistances
+  $$
+  R_{ij}^1, R_{ij}^2, \ldots, R_{ij}^m.
+  $$</p>
+</li>
+<li>
+<p>The equivalent resistance of parallel resistors is given by the reciprocal sum:
+  $$
+  \frac{1}{R_{\text{parallel}}} = \sum_{k=1}^m \frac{1}{R_{ij}^k}.
+  $$</p>
+</li>
+<li>
+<p>The parallel edges are replaced by a single edge <span class="arithmatex">\((v_i, v_j)\)</span> with weight <span class="arithmatex">\(R_{\text{parallel}}\)</span>.</p>
+</li>
+<li>
+<p>Additionally, parallel connections may appear as small cycles, requiring cycle detection algorithms.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="outline-reduction-strategy">Outline Reduction Strategy</h2>
+<p>The <strong>graph reduction</strong> algorithm iteratively applies series and parallel reductions:</p>
+<ol>
+<li><strong>Initialize</strong> with graph <span class="arithmatex">\(G = (V, E, w)\)</span>.</li>
+<li><strong>While</strong> the graph has more than one edge:</li>
+<li>Detect series nodes (<span class="arithmatex">\(\deg = 2\)</span>) and reduce.</li>
+<li>Detect parallel edges and reduce.</li>
+<li><strong>Repeat</strong> until <span class="arithmatex">\(G\)</span> reduces to a single edge between two nodes representing the equivalent resistance <span class="arithmatex">\(R_{\text{eq}}\)</span>.</li>
+</ol>
+<p>Formally,
+$$
+G^{(0)} = G, \quad G^{(t+1)} = \text{Reduce}(G^{(t)}),
+$$
+with termination condition
+$$
+|E^{(t)}| = 1.
+$$</p>
+<hr/>
+<h2 id="plan-for-nested-configurations">Plan for Nested Configurations</h2>
+<p>Nested series-parallel configurations require careful tracking:</p>
+<ul>
+<li>Use <strong>recursive reduction</strong> or <strong>stack-based tracking</strong> to handle nested subgraphs.</li>
+<li>Maintain mapping of original nodes and edges to reduced edges to preserve circuit integrity.</li>
+<li>Ensure reduction respects:
+  $$
+  R_{\text{eq}} = \text{series/parallel composition of nested resistors}.
+  $$</li>
+</ul>
+<hr/>
+<h2 id="define-termination-condition">Define Termination Condition</h2>
+<p>The reduction process ends when:</p>
+<ul>
+<li>The graph is simplified to a <strong>single edge</strong> <span class="arithmatex">\(e_{\text{final}}\)</span> connecting two terminal nodes <span class="arithmatex">\(v_s\)</span> and <span class="arithmatex">\(v_t\)</span>:
+  $$
+  G_{\text{final}} = ( {v_s, v_t}, {e_{\text{final}}} ),
+  $$
+  where <span class="arithmatex">\(w(e_{\text{final}}) = R_{\text{eq}}\)</span>.</li>
+</ul>
+<hr/>
+<h2 id="select-traversal-method">Select Traversal Method</h2>
+<p>Choose a traversal technique to identify reducible patterns systematically:</p>
+<ul>
+<li><strong>Depth-First Search (DFS)</strong>:</li>
+<li>Useful for exploring cycles and nested subgraphs.</li>
+<li>
+<p>Efficient for detecting series chains by node degree inspection.</p>
+</li>
+<li>
+<p><strong>Breadth-First Search (BFS)</strong>:</p>
+</li>
+<li>Useful for level-order traversal, detecting parallel connections early.</li>
+</ul>
+<p>In this context, <strong>DFS</strong> is generally preferred to explore connected components and nested structures:</p>
+<div class="arithmatex">\[
+\text{DFS}(v) : \text{explore all adjacent nodes recursively from } v.
+\]</div>
+<hr/>
+<h2 id="code-and-plots">Code and Plots</h2>
+<p><img alt="alt text" src="../indir%20%287%29circuit.gif"/></p>
+<pre><code class="language-python"># Install necessary packages for Colab
+!pip install networkx matplotlib pillow -q
+
+import os
+import shutil
+import networkx as nx
+import matplotlib.pyplot as plt
+from PIL import Image
+
+# Create folder for frames
+if os.path.exists("frames"):
+    shutil.rmtree("frames")
+os.makedirs("frames")
+
+# Step-by-step simplification colors
+colors = ["red", "green", "blue", "purple", "orange"]
+
+# Define the initial circuit graph
+def create_initial_circuit():
+    G = nx.Graph()
+    G.add_edges_from([
+        ("B+", "R1"),
+        ("R1", "R2"),
+        ("R2", "R3"),
+        ("R3", "R4"),
+        ("R2", "R5"),
+        ("R3", "R6"),
+        ("R5", "R6"),
+        ("R4", "B-")
+    ])
+    return G
+
+# Layout for reproducibility
+pos_layout = {
+    "B+": (0, 1),
+    "R1": (1, 1),
+    "R2": (2, 1),
+    "R5": (2, 0),
+    "R6": (3, 0),
+    "R3": (3, 1),
+    "R4": (4, 1),
+    "B-": (5, 1)
+}
+
+# Draw and save a frame of the circuit
+def draw_circuit(G, highlight_edges=[], highlight_color="red", step=0, label=""):
+    plt.figure(figsize=(8, 4))
+    edge_colors = [highlight_color if e in highlight_edges or (e[1], e[0]) in highlight_edges else 'black' for e in G.edges()]
+    nx.draw(G, pos=pos_layout, with_labels=True, node_color='lightgrey', edge_color=edge_colors,
+            node_size=1000, font_weight='bold')
+    plt.title(f"Step {step}: {label}")
+    plt.axis('off')
+    plt.savefig(f"frames/frame_{step:02d}.png")
+    plt.close()
+
+# Start simplification process
+G = create_initial_circuit()
+
+# Step 0: Original
+draw_circuit(G, step=0, label="Original Circuit")
+
+# Step 1: Combine R5 and R6 (parallel) -&gt; R56
+G = nx.contracted_nodes(G, "R5", "R6", self_loops=False)
+G = nx.relabel_nodes(G, {"R5": "R56"})
+pos_layout["R56"] = (2.5, 0)
+pos_layout.pop("R6")
+draw_circuit(G, highlight_edges=[("R2", "R56"), ("R56", "R3")], highlight_color=colors[0], step=1, label="Parallel: R5 and R6 -&gt; R56")
+
+# Step 2: Combine R2 and R56 (series) -&gt; R256
+G = nx.contracted_nodes(G, "R2", "R56", self_loops=False)
+G = nx.relabel_nodes(G, {"R2": "R256"})
+pos_layout["R256"] = (2.25, 0.75)
+pos_layout.pop("R56")
+draw_circuit(G, highlight_edges=[("R1", "R256"), ("R256", "R3")], highlight_color=colors[1], step=2, label="Series: R2 and R56 -&gt; R256")
+
+# Step 3: Combine R1 and R256 (series) -&gt; R1256
+G = nx.contracted_nodes(G, "R1", "R256", self_loops=False)
+G = nx.relabel_nodes(G, {"R1": "R1256"})
+pos_layout["R1256"] = (1.5, 1)
+pos_layout.pop("R256")
+draw_circuit(G, highlight_edges=[("B+", "R1256"), ("R1256", "R3")], highlight_color=colors[2], step=3, label="Series: R1 and R256 -&gt; R1256")
+
+# Step 4: Combine R3 and R4 (series) -&gt; R34
+G = nx.contracted_nodes(G, "R3", "R4", self_loops=False)
+G = nx.relabel_nodes(G, {"R3": "R34"})
+pos_layout["R34"] = (3.5, 1)
+pos_layout.pop("R4")
+draw_circuit(G, highlight_edges=[("R1256", "R34"), ("R34", "B-")], highlight_color=colors[3], step=4, label="Series: R3 and R4 -&gt; R34")
+
+# Step 5: Final Combine R1256 and R34 -&gt; Rfinal
+G = nx.contracted_nodes(G, "R1256", "R34", self_loops=False)
+G = nx.relabel_nodes(G, {"R1256": "Rfinal"})
+pos_layout["Rfinal"] = (2.5, 1)
+pos_layout.pop("R34")
+draw_circuit(G, highlight_edges=[("B+", "Rfinal"), ("Rfinal", "B-")], highlight_color=colors[4], step=5, label="Final: R1256 and R34 -&gt; Rfinal")
+
+# Create GIF from frames
+frames = [Image.open(f"frames/{frame}") for frame in sorted(os.listdir("frames")) if frame.endswith(".png")]
+frames[0].save("circuit_simplification.gif", format='GIF', append_images=frames[1:], save_all=True, duration=1000, loop=0)
+
+# Clean up frame directory
+shutil.rmtree("frames")
+
+# Display the GIF in Colab
+from IPython.display import Image as IPyImage
+IPyImage(filename="circuit_simplification.gif")
+
+
+</code></pre>
+<p><a href="https://colab.research.google.com/drive/1ofbvHbGM1Aj-FYEa6BG6h38_kcEYVSJ2">Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
