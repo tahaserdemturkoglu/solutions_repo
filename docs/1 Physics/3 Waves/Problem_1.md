@@ -277,6 +277,10 @@ which depend on the geometric layout of source positions $\{(x_i, y_i)\}$.
 
 ## Code and Plots
 
+![alt text](<indir (1)-1.gif>)
+![alt text](<indir (2)-1.gif>)
+
+
 
 ```python
 # Install required library
