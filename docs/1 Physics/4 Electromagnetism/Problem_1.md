@@ -85,8 +85,10 @@ Charged particles in space, such as cosmic rays and solar wind ions, are deflect
 - The **Earth’s magnetosphere** traps particles in radiation belts, e.g., Van Allen belts.
 
 - **Drift motion** arises due to inhomogeneities in $\mathbf{B}$:
-  $$\mathbf{v}_\text{drift} = \frac{1}{qB^2} (\mathbf{F}_\text{ext} \times \mathbf{B})$$
 
+$$
+\mathbf{v}_\text{drift} = \frac{1}{qB^2} (\mathbf{F}_\text{ext} \times \mathbf{B})
+$$
 ---
 
 ## Physical Roles of Electric and Magnetic Fields
