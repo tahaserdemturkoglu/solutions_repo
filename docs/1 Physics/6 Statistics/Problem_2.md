@@ -408,6 +408,7 @@ Estimate of $\pi$ becomes a **posterior mean**:
 ## Conclusion
 
 By embedding Circle-Based and Buffon’s Needle methods into the broader landscape of probabilistic modeling, we reveal deep connections to other domains and improve practical implementation. Bayesian and numerical models offer robust tools to quantify and reduce uncertainty — turning classical thought experiments into modern statistical machinery.
+
 ---
 
 ## Code and Plots
