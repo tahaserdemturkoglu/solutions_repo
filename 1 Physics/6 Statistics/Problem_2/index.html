@@ -172,6 +172,455 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h1 id="circle-based-method-in-geometric-probability">Circle-Based Method in Geometric Probability</h1>
+<h2 id="overview">Overview</h2>
+<p>The <strong>circle-based method</strong> for estimating <span class="arithmatex">\(\pi\)</span> leverages <em>geometric probability</em>. By randomly scattering points within a square that encloses a circle, one can approximate the value of <span class="arithmatex">\(\pi\)</span> based on the ratio of points that fall inside the circle to the total number of points.</p>
+<h2 id="estimating-pi-via-the-unit-circle">Estimating <span class="arithmatex">\(\pi\)</span> via the Unit Circle</h2>
+<p>Consider a <strong>unit circle</strong> centered at the origin <span class="arithmatex">\((0,0)\)</span>, inscribed within a square of side length <span class="arithmatex">\(2\)</span>. The square has area:</p>
+<div class="arithmatex">\[
+A_{\text{square}} = (2)^2 = 4
+\]</div>
+<p>The area of the unit circle is:</p>
+<div class="arithmatex">\[
+A_{\text{circle}} = \pi r^2 = \pi(1)^2 = \pi
+\]</div>
+<p>Hence, the probability <span class="arithmatex">\(P\)</span> that a point randomly chosen within the square lies inside the circle is:</p>
+<div class="arithmatex">\[
+P = \frac{A_{\text{circle}}}{A_{\text{square}}} = \frac{\pi}{4}
+\]</div>
+<p>Thus, by randomly generating <span class="arithmatex">\(N\)</span> points within the square, the fraction <span class="arithmatex">\(f\)</span> of points falling inside the circle gives:</p>
+<div class="arithmatex">\[
+f = \frac{N_{\text{in}}}{N} \approx \frac{\pi}{4} \Rightarrow \pi \approx 4f
+\]</div>
+<p>This forms the basis for the <strong>Monte Carlo</strong> method of <span class="arithmatex">\(\pi\)</span> estimation.</p>
+<h2 id="alternative-geometric-formulations">Alternative Geometric Formulations</h2>
+<h3 id="quarter-circle-in-first-quadrant">Quarter-Circle in First Quadrant</h3>
+<p>Let us consider a <strong>quarter-circle</strong> of radius <span class="arithmatex">\(1\)</span> in the first quadrant, inscribed in a unit square <span class="arithmatex">\([0,1] \times [0,1]\)</span>. The area of the quarter-circle is:</p>
+<div class="arithmatex">\[
+A_{\text{quarter-circle}} = \frac{\pi}{4}
+\]</div>
+<p>Probability of a point falling within the quarter-circle is again:</p>
+<div class="arithmatex">\[
+P = \frac{\pi/4}{1} = \frac{\pi}{4}
+\]</div>
+<p>The formulation is equivalent, but this version reduces computation as all generated coordinates are in the positive quadrant.</p>
+<h3 id="generalization-to-arbitrary-radius-r">Generalization to Arbitrary Radius <span class="arithmatex">\(r\)</span></h3>
+<p>If the circle has radius <span class="arithmatex">\(r\)</span> and is inscribed in a square of side <span class="arithmatex">\(2r\)</span>, then:</p>
+<div class="arithmatex">\[
+\frac{A_{\text{circle}}}{A_{\text{square}}} = \frac{\pi r^2}{(2r)^2} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4}
+\]</div>
+<p>The ratio remains independent of radius, reaffirming the robustness of the method under scaling.</p>
+<h2 id="impact-of-non-uniform-point-distributions">Impact of Non-Uniform Point Distributions</h2>
+<p>The assumption underlying the method is that points are <strong>uniformly distributed</strong> over the square. Let <span class="arithmatex">\(p(x, y)\)</span> be the probability density function (PDF) of the point distribution.</p>
+<p>If <span class="arithmatex">\(p(x, y) \neq \text{const.}\)</span>, then:</p>
+<div class="arithmatex">\[
+P = \iint_{(x,y) \in \text{circle}} p(x,y) \, dx \, dy
+\]</div>
+<p>The empirical ratio no longer represents <span class="arithmatex">\(\pi/4\)</span>, and estimation becomes biased.</p>
+<h3 id="example-radial-bias">Example: Radial Bias</h3>
+<p>Let points be sampled with a radial bias towards the center:</p>
+<div class="arithmatex">\[
+p(x,y) \propto \exp\left(-\alpha (x^2 + y^2)\right)
+\]</div>
+<p>The integral over the circular region increases relative to the uniform case, leading to <strong>overestimation</strong> of <span class="arithmatex">\(\pi\)</span>.</p>
+<h2 id="statistical-error-and-variance">Statistical Error and Variance</h2>
+<p>Let <span class="arithmatex">\(X_i\)</span> be an indicator random variable:</p>
+<div class="arithmatex">\[
+X_i =
+\begin{cases}
+1 &amp; \text{if point $i$ is inside the circle} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<p>Then:</p>
+<ul>
+<li>Expected value: <span class="arithmatex">\(\mathbb{E}[X_i] = \frac{\pi}{4}\)</span></li>
+<li>Variance: <span class="arithmatex">\(\text{Var}(X_i) = \frac{\pi}{4} \left(1 - \frac{\pi}{4} \right)\)</span></li>
+</ul>
+<p>Let <span class="arithmatex">\(\hat{\pi}_N = 4 \cdot \frac{1}{N} \sum_{i=1}^{N} X_i\)</span>, then by <strong>Central Limit Theorem</strong>:</p>
+<div class="arithmatex">\[
+\hat{\pi}_N \sim \mathcal{N} \left( \pi, \frac{16}{N} \cdot \frac{\pi}{4} \left(1 - \frac{\pi}{4} \right) \right)
+\]</div>
+<p>Thus, the <strong>standard error</strong> of the estimate is:</p>
+<div class="arithmatex">\[
+\text{SE}(\hat{\pi}_N) = \sqrt{ \frac{16}{N} \cdot \frac{\pi}{4} \left(1 - \frac{\pi}{4} \right) }
+\]</div>
+<h2 id="conclusion">Conclusion</h2>
+<p>The circle-based method is a beautiful application of geometric probability. While simple and intuitive, its accuracy hinges on uniform sampling and grows slowly with <span class="arithmatex">\(N\)</span> due to statistical variance. Exploring alternative geometries and correcting for distributional biases remain rich avenues for refinement.</p>
+<hr/>
+<h1 id="buffons-needle-method-in-geometric-probability">Buffon’s Needle Method in Geometric Probability</h1>
+<h2 id="classical-setup">Classical Setup</h2>
+<p>Buffon's Needle is a classical problem in <strong>geometric probability</strong>, originally devised to estimate <span class="arithmatex">\(\pi\)</span>. It involves dropping a needle of length <span class="arithmatex">\(\ell\)</span> onto a floor ruled with parallel lines spaced a distance <span class="arithmatex">\(d\)</span> apart <span class="arithmatex">\((\ell \leq d)\)</span>.</p>
+<p>Let <span class="arithmatex">\(\theta\)</span> be the acute angle between the needle and the lines (<span class="arithmatex">\(\theta \in [0, \frac{\pi}{2}]\)</span>), and let <span class="arithmatex">\(x\)</span> be the perpendicular distance from the needle's center to the nearest line (<span class="arithmatex">\(x \in [0, \frac{d}{2}]\)</span>).</p>
+<p>The needle crosses a line if:</p>
+<div class="arithmatex">\[
+x \leq \frac{\ell}{2} \sin \theta
+\]</div>
+<p>Integrating over all valid <span class="arithmatex">\((x, \theta)\)</span> pairs, the probability of a crossing is:</p>
+<div class="arithmatex">\[
+P = \frac{2\ell}{\pi d}
+\]</div>
+<p>Thus, the estimate for <span class="arithmatex">\(\pi\)</span> becomes:</p>
+<div class="arithmatex">\[
+\pi \approx \frac{2\ell N}{d N_{\text{cross}}}
+\]</div>
+<p>where <span class="arithmatex">\(N\)</span> is the total number of drops, and <span class="arithmatex">\(N_{\text{cross}}\)</span> is the number of crossings.</p>
+<hr/>
+<h2 id="generalization-variable-needle-length">Generalization: Variable Needle Length</h2>
+<p>When <span class="arithmatex">\(\ell &gt; d\)</span>, the geometry must accommodate needles longer than the line spacing. The probability of crossing becomes piecewise:</p>
+<div class="arithmatex">\[
+P =
+\begin{cases}
+\frac{2\ell}{\pi d} &amp; \text{if } \ell \leq d \\
+\frac{2}{\pi} \left[ \frac{\ell}{d} - \sqrt{1 - \left(\frac{d}{\ell} \right)^2} + \arccos\left( \frac{d}{\ell} \right) \right] &amp; \text{if } \ell &gt; d
+\end{cases}
+\]</div>
+<p>This more complex expression reflects how longer needles nearly always intersect a line unless they fall nearly parallel to the lines.</p>
+<hr/>
+<h2 id="alternative-configurations">Alternative Configurations</h2>
+<h3 id="1-non-uniform-line-spacing">1. <strong>Non-Uniform Line Spacing</strong></h3>
+<p>Suppose the spacing varies periodically or randomly: <span class="arithmatex">\(d = d(x)\)</span>.</p>
+<p>Then:</p>
+<div class="arithmatex">\[
+P = \mathbb{E}_{x,\theta} \left[ \mathbb{I} \left( x \leq \frac{\ell}{2} \sin \theta \right) \cdot p_d(x) \right]
+\]</div>
+<p>where <span class="arithmatex">\(p_d(x)\)</span> is the probability density of line spacing at <span class="arithmatex">\(x\)</span>.</p>
+<h3 id="2-non-parallel-or-grid-patterns">2. <strong>Non-Parallel or Grid Patterns</strong></h3>
+<p>For <strong>grid lines</strong> (vertical and horizontal):</p>
+<ul>
+<li>A crossing occurs if the needle intersects <strong>either</strong> set of lines.</li>
+</ul>
+<p>Let <span class="arithmatex">\(P_v\)</span> and <span class="arithmatex">\(P_h\)</span> be probabilities of vertical and horizontal line crossings, then:</p>
+<div class="arithmatex">\[
+P_{\text{grid}} = P_v + P_h - P_v P_h
+\]</div>
+<p>Each can be evaluated independently using Buffon's formula, as orientation affects projections along both axes.</p>
+<h3 id="3-curved-or-finite-length-lines">3. <strong>Curved or Finite-Length Lines</strong></h3>
+<p>If the lines are <strong>curved</strong> (e.g., concentric arcs) or of <strong>finite length</strong>, one must numerically integrate over local tangent angles and spatial inhomogeneities.</p>
+<p>Let <span class="arithmatex">\(\gamma(s)\)</span> be a family of curve parameterizations, then crossing probability involves:</p>
+<div class="arithmatex">\[
+P = \iint_{\text{needle domain}} \mathbb{I}(\text{intersect}(\gamma(s), \text{needle})) \, d\theta \, dx
+\]</div>
+<hr/>
+<h2 id="non-ideal-needles">Non-Ideal Needles</h2>
+<h3 id="1-needle-thickness">1. <strong>Needle Thickness</strong></h3>
+<p>If needle has radius <span class="arithmatex">\(r &gt; 0\)</span>, the crossing condition becomes more generous:</p>
+<div class="arithmatex">\[
+x \leq \frac{\ell}{2} \sin \theta + r
+\]</div>
+<p>This inflates the crossing probability and must be corrected for accurate <span class="arithmatex">\(\pi\)</span> estimation.</p>
+<h3 id="2-curved-needles">2. <strong>Curved Needles</strong></h3>
+<p>For a <strong>circular arc</strong> of angle <span class="arithmatex">\(\phi\)</span> and radius <span class="arithmatex">\(R\)</span>:</p>
+<ul>
+<li>Arc length: <span class="arithmatex">\(\ell = R \phi\)</span></li>
+<li>Projection geometry changes, requiring simulation or advanced integral geometry to evaluate <span class="arithmatex">\(P(\text{cross})\)</span>.</li>
+</ul>
+<hr/>
+<h2 id="convergence-analysis">Convergence Analysis</h2>
+<h3 id="buffon-vs-circle-based-method">Buffon vs. Circle-Based Method</h3>
+<p>Let <span class="arithmatex">\(X_i\)</span> be the crossing indicator (<span class="arithmatex">\(1\)</span> if intersects, <span class="arithmatex">\(0\)</span> otherwise), then:</p>
+<ul>
+<li>Mean: <span class="arithmatex">\(\mathbb{E}[X_i] = P\)</span></li>
+<li>Variance: <span class="arithmatex">\(\text{Var}(X_i) = P(1 - P)\)</span></li>
+</ul>
+<p>Let <span class="arithmatex">\(\hat{\pi}_N\)</span> be the estimate of <span class="arithmatex">\(\pi\)</span> using <span class="arithmatex">\(N\)</span> trials.</p>
+<h4 id="buffons-method">Buffon’s Method:</h4>
+<div class="arithmatex">\[
+\hat{\pi}_N = \frac{2\ell N}{d N_{\text{cross}}}
+\]</div>
+<p>Using the delta method for variance:</p>
+<div class="arithmatex">\[
+\text{Var}(\hat{\pi}_N) \approx \left( \frac{\partial \hat{\pi}}{\partial N_{\text{cross}}} \right)^2 \text{Var}(N_{\text{cross}})
+= \left( \frac{-2\ell N}{d N_{\text{cross}}^2} \right)^2 \cdot N P(1 - P)
+\]</div>
+<p>Thus, <strong>variance decays as <span class="arithmatex">\(1/N\)</span></strong>, but has a larger constant than in the circle-based method due to greater sensitivity to rare events (low <span class="arithmatex">\(P\)</span> when <span class="arithmatex">\(\ell \ll d\)</span>).</p>
+<h4 id="circle-based-method">Circle-Based Method:</h4>
+<ul>
+<li>More robust to distributional noise</li>
+<li>Generally exhibits <strong>lower variance for same <span class="arithmatex">\(N\)</span></strong>, especially when using uniformly random <span class="arithmatex">\((x, y)\)</span> coordinates</li>
+</ul>
+<h3 id="summary-of-comparison">Summary of Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Buffon’s Needle</th>
+<th>Circle-Based Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Variance</td>
+<td>Higher (especially for short <span class="arithmatex">\(\ell\)</span>)</td>
+<td>Lower</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>Simple with ruler</td>
+<td>Easier with random <span class="arithmatex">\((x, y)\)</span></td>
+</tr>
+<tr>
+<td>Extensions</td>
+<td>Rich geometric possibilities</td>
+<td>Limited to planar ratios</td>
+</tr>
+<tr>
+<td>Bias Potential</td>
+<td>Sensitive to misalignment or curvature</td>
+<td>Sensitive to non-uniformity</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="conclusion_1">Conclusion</h2>
+<p>Buffon’s Needle provides a profound historical example of geometric probability and <span class="arithmatex">\(\pi\)</span> estimation. While elegant, its practical use requires careful handling of geometry and error sources. Modern analyses generalize Buffon’s setup to a rich landscape of probabilistic geometry, offering fertile ground for research and simulation.</p>
+<hr/>
+<h1 id="general-theoretical-enhancements-in-monte-carlo-estimation">General Theoretical Enhancements in Monte Carlo π Estimation</h1>
+<h2 id="1-broader-context-monte-carlo-methods-across-disciplines">1. Broader Context: Monte Carlo Methods Across Disciplines</h2>
+<p>Both the <strong>Circle-Based</strong> and <strong>Buffon’s Needle</strong> methods are instances of <strong>Monte Carlo integration</strong>, where we estimate a quantity by averaging the outcomes of random samples. These techniques form the basis for methods used in:</p>
+<ul>
+<li><strong>Physics</strong>: Path integrals in quantum mechanics, Ising models in statistical mechanics.</li>
+<li><strong>Finance</strong>: Option pricing via stochastic differential equations (e.g., Black-Scholes).</li>
+<li><strong>Engineering</strong>: Uncertainty quantification and robust design under probabilistic constraints.</li>
+</ul>
+<p>The general form of Monte Carlo estimation is:</p>
+<div class="arithmatex">\[
+\mathbb{E}[f(X)] \approx \frac{1}{N} \sum_{i=1}^{N} f(X_i)
+\]</div>
+<p>where <span class="arithmatex">\(X_i\)</span> are i.i.d. samples from a distribution and <span class="arithmatex">\(f\)</span> is a measurable function. In both π estimation methods, <span class="arithmatex">\(f(X_i)\)</span> is an <strong>indicator function</strong> for a geometric event (e.g., being inside a circle or crossing a line).</p>
+<hr/>
+<h2 id="2-unified-framework-geometric-probability-and-estimation">2. Unified Framework: Geometric Probability and π Estimation</h2>
+<p>Let <span class="arithmatex">\(\Omega\)</span> be a sample space of spatial configurations, with probability measure <span class="arithmatex">\(\mathbb{P}\)</span> defined over it. Define a geometric event <span class="arithmatex">\(A\)</span> such that:</p>
+<div class="arithmatex">\[
+\mathbb{P}(A) = \frac{\pi}{4}
+\]</div>
+<p>for the circle method, or <span class="arithmatex">\(= \frac{2\ell}{\pi d}\)</span> in Buffon’s method.</p>
+<p>Then define the random variable:</p>
+<div class="arithmatex">\[
+Z_i = \mathbb{I}_{A}(X_i)
+\]</div>
+<p>and Monte Carlo estimation becomes:</p>
+<div class="arithmatex">\[
+\hat{p} = \frac{1}{N} \sum_{i=1}^{N} Z_i \Rightarrow \pi \approx \mathcal{T}(\hat{p})
+\]</div>
+<p>where <span class="arithmatex">\(\mathcal{T}\)</span> is a <strong>transformation function</strong> mapping the estimated probability back to an estimate of <span class="arithmatex">\(\pi\)</span>. For instance:</p>
+<ul>
+<li>Circle Method: <span class="arithmatex">\(\mathcal{T}(p) = 4p\)</span></li>
+<li>Buffon Method: <span class="arithmatex">\(\mathcal{T}(p) = \frac{2\ell}{d p}\)</span></li>
+</ul>
+<p>Thus, both methods become specific instances of a general pipeline:</p>
+<ol>
+<li>Define spatial probability space</li>
+<li>Sample <span class="arithmatex">\(X_i\)</span></li>
+<li>Evaluate indicator <span class="arithmatex">\(Z_i\)</span></li>
+<li>Transform via <span class="arithmatex">\(\mathcal{T}\)</span> to estimate <span class="arithmatex">\(\pi\)</span></li>
+</ol>
+<hr/>
+<h2 id="3-computational-precision-and-numerical-stability">3. Computational Precision and Numerical Stability</h2>
+<p>Monte Carlo methods are sensitive to <strong>floating-point errors</strong>, especially when working with large <span class="arithmatex">\(N\)</span> or small probabilities.</p>
+<h3 id="issues">Issues:</h3>
+<ul>
+<li>Finite-precision arithmetic introduces <strong>round-off error</strong> in trigonometric and square-root operations.</li>
+<li><strong>Catastrophic cancellation</strong> occurs when subtracting nearly equal numbers (e.g., <span class="arithmatex">\(\sqrt{1 - \epsilon}\)</span>).</li>
+<li>The <strong>law of large numbers</strong> converges slowly if error is not controlled.</li>
+</ul>
+<h3 id="model-for-floating-point-error-impact">Model for Floating-Point Error Impact:</h3>
+<p>Let <span class="arithmatex">\(\hat{\pi}_{\text{true}}\)</span> be the ideal estimate and <span class="arithmatex">\(\hat{\pi}_{\text{float}}\)</span> be the computed one. Then:</p>
+<div class="arithmatex">\[
+\hat{\pi}_{\text{float}} = \hat{\pi}_{\text{true}} + \epsilon_{\text{rand}} + \epsilon_{\text{fp}}
+\]</div>
+<p>where:
+- <span class="arithmatex">\(\epsilon_{\text{rand}}\)</span> is sampling error (<span class="arithmatex">\(\sim \mathcal{O}(1/\sqrt{N})\)</span>)
+- <span class="arithmatex">\(\epsilon_{\text{fp}}\)</span> is computational error (<span class="arithmatex">\(\sim \mathcal{O}(\varepsilon_{\text{machine}})\)</span>)</p>
+<p>For IEEE-754 double precision, <span class="arithmatex">\(\varepsilon_{\text{machine}} \approx 2^{-53} \approx 1.1 \times 10^{-16}\)</span></p>
+<hr/>
+<h2 id="4-bayesian-refinement-of-estimates">4. Bayesian Refinement of π Estimates</h2>
+<p>Rather than using a point estimate, we may adopt a <strong>Bayesian inference</strong> approach to model uncertainty in <span class="arithmatex">\(\pi\)</span>.</p>
+<p>Let <span class="arithmatex">\(Z_i \sim \text{Bernoulli}(p)\)</span> with prior on <span class="arithmatex">\(p\)</span> given by:</p>
+<div class="arithmatex">\[
+p \sim \text{Beta}(\alpha, \beta)
+\]</div>
+<p>The posterior is then:</p>
+<div class="arithmatex">\[
+p \mid Z_1, \dots, Z_N \sim \text{Beta}(\alpha + S, \beta + N - S)
+\]</div>
+<p>where <span class="arithmatex">\(S = \sum Z_i\)</span> is the number of successes (circle hits or needle crossings).</p>
+<p>Estimate of <span class="arithmatex">\(\pi\)</span> becomes a <strong>posterior mean</strong>:</p>
+<ul>
+<li>
+<p>Circle Method:
+  $$
+  \mathbb{E}[\pi \mid \text{data}] = 4 \cdot \frac{\alpha + S}{\alpha + \beta + N}
+  $$</p>
+</li>
+<li>
+<p>Buffon’s Method:
+  $$
+  \mathbb{E}[\pi \mid \text{data}] = \frac{2\ell}{d} \cdot \frac{\alpha + \beta + N}{\alpha + S}
+  $$</p>
+</li>
+</ul>
+<h3 id="advantages">Advantages:</h3>
+<ul>
+<li>Produces <strong>credible intervals</strong> rather than just point estimates</li>
+<li>Handles small <span class="arithmatex">\(N\)</span> robustly</li>
+<li>Can incorporate prior knowledge (e.g., we believe <span class="arithmatex">\(\pi \in (3, 3.2)\)</span>)</li>
+</ul>
+<hr/>
+<h2 id="summary-table">Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Enhancement Type</th>
+<th>Description</th>
+<th>Implications</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cross-Domain Monte Carlo</td>
+<td>Connection to physics, finance</td>
+<td>Deepens understanding, extends utility</td>
+</tr>
+<tr>
+<td>Unified Framework</td>
+<td>Indicator-based probability estimation</td>
+<td>Allows comparative analysis of methods</td>
+</tr>
+<tr>
+<td>Floating-Point Model</td>
+<td>Error decomposition into sampling and machine error</td>
+<td>Guides implementation-level accuracy</td>
+</tr>
+<tr>
+<td>Bayesian Refinement</td>
+<td>Beta-binomial model for posterior <span class="arithmatex">\(\pi\)</span></td>
+<td>Offers uncertainty quantification</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="conclusion_2">Conclusion</h2>
+<h2 id="by-embedding-circle-based-and-buffons-needle-methods-into-the-broader-landscape-of-probabilistic-modeling-we-reveal-deep-connections-to-other-domains-and-improve-practical-implementation-bayesian-and-numerical-models-offer-robust-tools-to-quantify-and-reduce-uncertainty-turning-classical-thought-experiments-into-modern-statistical-machinery">By embedding Circle-Based and Buffon’s Needle methods into the broader landscape of probabilistic modeling, we reveal deep connections to other domains and improve practical implementation. Bayesian and numerical models offer robust tools to quantify and reduce uncertainty — turning classical thought experiments into modern statistical machinery.</h2>
+<h2 id="code-and-plots">Code and Plots</h2>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Set number of random points
+N = 10000
+
+# Generate random points in [-1, 1] x [-1, 1]
+x = np.random.uniform(-1, 1, N)
+y = np.random.uniform(-1, 1, N)
+
+# Compute distances from origin
+dist_sq = x**2 + y**2
+inside = dist_sq &lt;= 1
+
+# Estimate π
+pi_estimate = 4 * np.sum(inside) / N
+print(f"Estimated π with {N} points: {pi_estimate:.6f}")
+
+# Plotting
+fig, ax = plt.subplots(figsize=(6, 6), dpi=120)
+
+# Plot points
+ax.scatter(x[inside], y[inside], color='blue', s=1, label='Inside Circle')
+ax.scatter(x[~inside], y[~inside], color='red', s=1, label='Outside Circle')
+
+# Circle boundary
+circle = plt.Circle((0, 0), 1, edgecolor='black', facecolor='none', linewidth=2)
+ax.add_patch(circle)
+
+# Square boundary
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
+ax.set_aspect('equal')
+ax.set_title(f"Monte Carlo Estimation of π\nEstimated π ≈ {pi_estimate:.6f}")
+ax.legend(loc='lower left', markerscale=6, frameon=True)
+
+# Remove axes for clean appearance
+ax.axis('off')
+
+# Save high-resolution image (optional)
+# plt.savefig("monte_carlo_pi_estimate.png", dpi=300, bbox_inches='tight')
+
+plt.show()
+</code></pre>
+<hr/>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+needle_length = 1.0
+line_spacing = 2.0
+num_needles = 100_000  # Large number for accuracy
+
+# Generate random needle centers and angles
+x_centers = np.random.uniform(0, 4 * line_spacing, num_needles)
+theta = np.random.uniform(0, np.pi, num_needles)
+
+# Calculate needle endpoints
+dx = (needle_length / 2) * np.cos(theta)
+x1 = x_centers - dx
+x2 = x_centers + dx
+
+# Robust crossing check function
+def check_crossings(x1, x2, line_spacing, max_x):
+    lines = np.arange(0, max_x + line_spacing, line_spacing)
+    crosses = np.zeros(x1.shape, dtype=bool)
+    for line_x in lines:
+        cond = (x1 - line_x) * (x2 - line_x) &lt;= 0
+        cond &amp;= (x1 != x2)  # Exclude needles that just touch at an endpoint
+        crosses = crosses | cond
+    return crosses
+
+max_x = 4 * line_spacing
+crosses = check_crossings(x1, x2, line_spacing, max_x)
+num_crosses = np.sum(crosses)
+
+# Pi estimation formula
+pi_estimate = (2 * needle_length * num_needles) / (line_spacing * num_crosses)
+
+# Calculate standard error
+p_hat = num_crosses / num_needles
+variance = p_hat * (1 - p_hat)
+se_pi = (2 * needle_length) / (line_spacing * p_hat**2) * np.sqrt(variance / num_needles)
+
+print(f"Estimated π = {pi_estimate:.8f}")
+print(f"Standard error = ±{se_pi:.8f}")
+
+# Visualization: sample 50 needles for clarity
+sample_indices = np.random.choice(num_needles, 50, replace=False)
+x1_vis = x1[sample_indices]
+x2_vis = x2[sample_indices]
+crosses_vis = crosses[sample_indices]
+y_vis = np.linspace(0, 50, 50)
+
+# Plotting
+fig, ax = plt.subplots(figsize=(12, 6))
+
+# Draw vertical lines
+for i in range(5):
+    ax.axvline(i * line_spacing, color='black', linestyle='--', linewidth=1)
+
+# Draw needles, color-coded by crossing
+for i in range(50):
+    color = 'blue' if crosses_vis[i] else 'red'
+    ax.plot([x1_vis[i], x2_vis[i]], [y_vis[i], y_vis[i]], color=color, linewidth=2)
+    ax.scatter([x1_vis[i], x2_vis[i]], [y_vis[i], y_vis[i]], color=color, s=20)
+
+ax.set_xlim(-1, max_x + 1)
+ax.set_ylim(-5, 55)
+ax.set_yticks([])
+ax.set_title(f"Buffon’s Needle Simulation (n={num_needles})\nEstimated π = {pi_estimate:.8f} ± {se_pi:.8f}", fontsize=16)
+ax.set_xlabel("Horizontal position")
+plt.tight_layout()
+plt.show()
+</code></pre>
+<p><a href="https://colab.research.google.com/drive/1CxIAL0rVCu3h2mnSKswsMCUmySqOmfD0#scrollTo=GgokTFIFmWSK">Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
