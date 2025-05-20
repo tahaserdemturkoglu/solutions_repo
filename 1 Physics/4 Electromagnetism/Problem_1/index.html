@@ -408,88 +408,102 @@ m \frac{d\mathbf{v}}{dt} = q (\mathbf{E} + \mathbf{v} \times \mathbf{B})
 <li>Number of steps: <span class="arithmatex">\(N = 10000\)</span></li>
 </ul>
 <h2 id="code-and-plots">Code and Plots</h2>
-<h2 id="_1"><img alt="alt text" src="../image.png"/></h2>
-<h2 id="_2"><img alt="alt text" src="../image-1.png"/></h2>
-<p><img alt="alt text" src="../image-2.png"/></p>
-<pre><code class="language-python">
-import numpy as np
+<p><img alt="alt text" src="../image-3.png"/>
+<img alt="alt text" src="../image-4.png"/>
+<img alt="alt text" src="../image-5.png"/></p>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-# === Sector 1: Common Functions ===
+# === Common Functions ===
 
 def lorentz_force(q, m, E, B, v):
-    """Compute the Lorentz force per unit mass."""
     return (q / m) * (E + np.cross(v, B))
 
-def simulate_motion(q, m, E, B, v_init, r_init, dt, num_steps):
-    """Simulate particle trajectory under Lorentz force using Euler method."""
+def simulate_motion_euler(q, m, E, B, v_init, r_init, dt, num_steps):
+    """Euler method for general motion (used for helical and drift cases)."""
     v = np.array(v_init, dtype=float)
     r = np.array(r_init, dtype=float)
     trajectory = [r.copy()]
-
     for _ in range(num_steps):
         a = lorentz_force(q, m, E, B, v)
         v += a * dt
         r += v * dt
         trajectory.append(r.copy())
+    return np.array(trajectory)
+
+def simulate_motion_boris(q, m, E, B, v_init, r_init, dt, num_steps):
+    """Boris algorithm for accurate magnetic motion (preserves circularity)."""
+    v = np.array(v_init, dtype=float)
+    r = np.array(r_init, dtype=float)
+    trajectory = [r.copy()]
+
+    t = (q * B / m) * (0.5 * dt)
+    t_mag2 = np.dot(t, t)
+    s = 2 * t / (1 + t_mag2)
+
+    for _ in range(num_steps):
+        v_minus = v + (q * E / m) * (0.5 * dt)
+        v_prime = v_minus + np.cross(v_minus, t)
+        v_plus = v_minus + np.cross(v_prime, s)
+        v = v_plus + (q * E / m) * (0.5 * dt)
+        r += v * dt
+        trajectory.append(r.copy())
 
     return np.array(trajectory)
 
-def plot_trajectory(trajectory, title='3D Trajectory'):
-    """Plot 3D trajectory of the particle."""
+def plot_trajectory(trajectory, title='3D Trajectory', drift_vector=None):
     fig = plt.figure(figsize=(8, 6))
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2])
+    ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], label='Particle Path')
+
+    if drift_vector is not None:
+        drift_line = np.outer(np.linspace(0, 10, 100), drift_vector)
+        ax.plot(drift_line[:, 0], drift_line[:, 1], drift_line[:, 2], 'r--', label='E×B Drift')
+
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
     ax.set_title(title)
+    if drift_vector is not None:
+        ax.legend()
     ax.grid(True)
     plt.tight_layout()
     plt.show()
 
+# === Simulation Parameters ===
+q, m = 1.0, 1.0        # Charge and mass
+dt = 0.01              # Time step
+steps = 1000           # Number of integration steps
 
-# === Sector 2: Simulation Parameters ===
-q, m = 1.0, 1.0     # Charge and mass
-dt = 0.01           # Time step
-steps = 1000        # Number of integration steps
-
-
-# === Sector 3: Case A - Helical Motion ===
-print("Running Case A: Helical Motion (Uniform Magnetic Field Only)")
-
+# === Case A: Helical Motion ===
+print("Running Case A: Helical Motion (Spiral in Z)")
 B_A = np.array([0, 0, 1])
 E_A = np.zeros(3)
-v0_A = [1, 0, 1]
+v0_A = [1, 0, 1]       # Velocity with perpendicular and parallel components
 r0_A = [0, 0, 0]
+trajectory_A = simulate_motion_euler(q, m, E_A, B_A, v0_A, r0_A, dt, steps)
+plot_trajectory(trajectory_A, title='Case A: Helical Motion in Z')
 
-trajectory_A = simulate_motion(q, m, E_A, B_A, v0_A, r0_A, dt, steps)
-plot_trajectory(trajectory_A, title='Case A: Helical Motion in Uniform B Field')
-
-
-# === Sector 4: Case B - Aligned E and B ===
-print("Running Case B: Aligned Electric and Magnetic Fields")
-
+# === Case B: Perfect Circular Motion (Boris Method) ===
+print("Running Case B: Perfect Circular Motion (Boris Method)")
 B_B = np.array([0, 0, 1])
-E_B = np.array([0, 0, 1])
-v0_B = [1, 0, 0]
+E_B = np.zeros(3)
+v0_B = [1, 0, 0]       # Velocity strictly perpendicular to B
 r0_B = [0, 0, 0]
+trajectory_B = simulate_motion_boris(q, m, E_B, B_B, v0_B, r0_B, dt, steps)
+plot_trajectory(trajectory_B, title='Case B: Perfect Circular Motion (XY Plane)')
 
-trajectory_B = simulate_motion(q, m, E_B, B_B, v0_B, r0_B, dt, steps)
-plot_trajectory(trajectory_B, title='Case B: Aligned E and B Fields')
-
-
-# === Sector 5: Case C - Crossed E × B Fields ===
-print("Running Case C: Crossed Electric and Magnetic Fields (E × B Drift)")
-
+# === Case C: E×B Drift ===
+print("Running Case C: E×B Drift")
 B_C = np.array([0, 0, 1])
 E_C = np.array([1, 0, 0])
 v0_C = [0, 0, 0]
 r0_C = [0, 0, 0]
+trajectory_C = simulate_motion_euler(q, m, E_C, B_C, v0_C, r0_C, dt, steps)
+v_drift = np.cross(E_C, B_C) / np.dot(B_C, B_C)
+plot_trajectory(trajectory_C, title='Case C: E×B Drift', drift_vector=v_drift)
 
-trajectory_C = simulate_motion(q, m, E_C, B_C, v0_C, r0_C, dt, steps)
-plot_trajectory(trajectory_C, title='Case C: Crossed E and B Fields (E × B Drift)')
 </code></pre>
 <p><a href="https://colab.research.google.com/drive/1I7k1RVdSVBdTG8CCLN-LS481sLJE_pNQ">Colab</a></p>
 </div>
