@@ -462,76 +462,80 @@ plt.show()
 ```
 ---
 
-![alt text](image-2.png)
+![alt text](image-3.png)
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Parameters
-needle_length = 1.0
-line_spacing = 2.0
-num_needles = 100_000  # Large number for accuracy
+# Simulation parameters
+N = 1000                # Number of needle drops
+needle_length = 1.0      # Length of the needle (L)
+line_spacing = 2.0       # Distance between parallel lines (D)
 
-# Generate random needle centers and angles
-x_centers = np.random.uniform(0, 4 * line_spacing, num_needles)
-theta = np.random.uniform(0, np.pi, num_needles)
+assert needle_length <= line_spacing, "Buffon's Needle assumes L ≤ D"
 
-# Calculate needle endpoints
-dx = (needle_length / 2) * np.cos(theta)
-x1 = x_centers - dx
-x2 = x_centers + dx
+# Sample needle centers and angles
+x_centers = np.random.uniform(0, line_spacing, N)
+theta = np.random.uniform(0, np.pi, N)  # Uniform angle in [0, π]
 
-# Robust crossing check function
-def check_crossings(x1, x2, line_spacing, max_x):
-    lines = np.arange(0, max_x + line_spacing, line_spacing)
-    crosses = np.zeros(x1.shape, dtype=bool)
-    for line_x in lines:
-        cond = (x1 - line_x) * (x2 - line_x) <= 0
-        cond &= (x1 != x2)  # Exclude needles that just touch at an endpoint
-        crosses = crosses | cond
-    return crosses
+# Distance from center to nearest line (in x-direction)
+x_dist_to_nearest_line = np.minimum(x_centers % line_spacing, line_spacing - (x_centers % line_spacing))
 
-max_x = 4 * line_spacing
-crosses = check_crossings(x1, x2, line_spacing, max_x)
+# Determine if needle crosses a line (projection method)
+crosses = (needle_length / 2) * np.sin(theta) >= x_dist_to_nearest_line
 num_crosses = np.sum(crosses)
 
-# Pi estimation formula
-pi_estimate = (2 * needle_length * num_needles) / (line_spacing * num_crosses)
+# Estimate π
+if num_crosses > 0:
+    pi_estimate = (2 * needle_length * N) / (line_spacing * num_crosses)
+else:
+    pi_estimate = np.nan
 
-# Calculate standard error
-p_hat = num_crosses / num_needles
-variance = p_hat * (1 - p_hat)
-se_pi = (2 * needle_length) / (line_spacing * p_hat**2) * np.sqrt(variance / num_needles)
+print(f"Estimated π with {N} needles: {pi_estimate:.6f} ({num_crosses} crossings)")
 
-print(f"Estimated π = {pi_estimate:.8f}")
-print(f"Standard error = ±{se_pi:.8f}")
+# Visualization
+fig, axs = plt.subplots(2, 1, figsize=(8, 10), gridspec_kw={'height_ratios': [3, 1]})
+ax1, ax2 = axs
 
-# Visualization: sample 50 needles for clarity
-sample_indices = np.random.choice(num_needles, 50, replace=False)
-x1_vis = x1[sample_indices]
-x2_vis = x2[sample_indices]
-crosses_vis = crosses[sample_indices]
-y_vis = np.linspace(0, 50, 50)
+# Generate full needle endpoints for plotting
+x1 = x_centers - (needle_length / 2) * np.cos(theta)
+x2 = x_centers + (needle_length / 2) * np.cos(theta)
+y_centers = np.arange(N) / 250  # for vertical spreading
+y1 = y_centers - (needle_length / 2) * np.sin(theta)
+y2 = y_centers + (needle_length / 2) * np.sin(theta)
 
-# Plotting
-fig, ax = plt.subplots(figsize=(12, 6))
+# Plot needles
+for i in range(N):
+    color = 'blue' if crosses[i] else 'red'
+    ax1.plot([x1[i], x2[i]], [y1[i], y2[i]], color=color, linewidth=0.5, alpha=0.6)
 
-# Draw vertical lines
-for i in range(5):
-    ax.axvline(i * line_spacing, color='black', linestyle='--', linewidth=1)
+# Draw vertical parallel lines
+max_x = max(np.max(x1), np.max(x2)) + 1
+n_lines = int(max_x // line_spacing) + 2
+for i in range(n_lines):
+    ax1.axvline(i * line_spacing, color='black', linestyle='--', linewidth=0.8, alpha=0.4)
 
-# Draw needles, color-coded by crossing
-for i in range(50):
-    color = 'blue' if crosses_vis[i] else 'red'
-    ax.plot([x1_vis[i], x2_vis[i]], [y_vis[i], y_vis[i]], color=color, linewidth=2)
-    ax.scatter([x1_vis[i], x2_vis[i]], [y_vis[i], y_vis[i]], color=color, s=20)
+# Formatting
+ax1.set_title("Buffon’s Needle Simulation (Corrected)")
+ax1.set_xlim(0, line_spacing * (n_lines - 1))
+ax1.set_ylim(0, np.max(y2) + 1)
+ax1.set_xlabel("x (needle position)")
+ax1.set_ylabel("Needle Index (scaled)")
+ax1.set_aspect('auto')
+ax1.grid(False)
 
-ax.set_xlim(-1, max_x + 1)
-ax.set_ylim(-5, 55)
-ax.set_yticks([])
-ax.set_title(f"Buffon’s Needle Simulation (n={num_needles})\nEstimated π = {pi_estimate:.8f} ± {se_pi:.8f}", fontsize=16)
-ax.set_xlabel("Horizontal position")
+# Dashboard text
+ax2.axis('off')
+summary = f"""
+Total Needles     : {N}
+Needle Length (L) : {needle_length}
+Line Spacing (D)  : {line_spacing}
+Crossings         : {num_crosses}
+Estimated π       : {pi_estimate:.6f}
+"""
+ax2.text(0.05, 0.5, summary, fontsize=12, family='monospace')
+
 plt.tight_layout()
 plt.show()
 ```
